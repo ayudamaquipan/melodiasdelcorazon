@@ -27,8 +27,7 @@
             color: var(--color-dark);
             line-height: 1.6;
         }
-        
-        header {
+header {
             background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
             color: white;
             text-align: center;
@@ -104,8 +103,7 @@
             opacity: 0.9;
             font-weight: 500;
         }
-        
-        nav {
+nav {
             background-color: var(--color-dark);
             padding: 1rem 0;
             position: sticky;
@@ -141,8 +139,7 @@
             padding: 4rem 0;
             scroll-margin-top: 5rem;
         }
-        
-        .btn {
+.btn {
             display: inline-block;
             background-color: var(--color-primary);
             color: white;
@@ -171,23 +168,15 @@
             background-color: #3dbfb3;
         }
         
-        .btn-accent {
-            background-color: var(--color-accent);
-        }
-        
-        .btn-accent:hover {
-            background-color: #ff8c00;
-        }
-        
-        .section-title {
+        section h2 {
             text-align: center;
             font-size: 2.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 3rem;
             color: var(--color-primary);
             position: relative;
         }
         
-        .section-title::after {
+        section h2::after {
             content: '';
             position: absolute;
             bottom: -1rem;
@@ -197,15 +186,7 @@
             height: 4px;
             background-color: var(--color-accent);
         }
-        
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.3rem;
-            color: #666;
-            margin-bottom: 3rem;
-        }
-        
-        .hero {
+.hero {
             text-align: center;
             padding: 5rem 0;
             background: linear-gradient(135deg, #fff6e5, #ffefd5);
@@ -240,8 +221,7 @@
             margin-bottom: 2rem;
             color: #545454;
         }
-        
-        .hero-features {
+.hero-features {
             display: flex;
             flex-direction: column;
             gap: 1rem;
@@ -308,8 +288,7 @@
             transform: translate(-50%, -50%) scale(1.1);
             background-color: #ff5252;
         }
-        
-        .social-proof {
+.social-proof {
             text-align: center;
             background-color: white;
             padding: 1.5rem;
@@ -329,7 +308,39 @@
             font-size: 1.1rem;
         }
         
-        /* Special Offer Styles */
+        .btn-accent {
+            background-color: var(--color-accent);
+        }
+        
+        .btn-accent:hover {
+            background-color: #ff8c00;
+        }
+.section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background-color: var(--color-accent);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+/* Special Offer Styles */
         .special-offer {
             background-color: #fff;
             padding: 3rem;
@@ -377,8 +388,7 @@
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
             z-index: 10;
         }
-        
-        .special-offer h3 {
+.special-offer h3 {
             font-size: 2.2rem;
             color: var(--color-primary);
             margin-bottom: 1.5rem;
@@ -430,8 +440,7 @@
             font-size: 0.9rem;
             opacity: 0.9;
         }
-        
-        .price-container {
+.price-container {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -485,43 +494,169 @@
             color: var(--color-dark);
             margin-top: 1.5rem;
         }
-        
-        /* Features Section */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+/* Examples Section Styles */
+        .examples {
+            background-color: #f9f9f9;
+            padding: 5rem 0;
         }
         
-        .feature-card {
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .example-card {
             background-color: white;
-            padding: 2rem;
             border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
             transition: transform 0.3s ease;
         }
         
-        .feature-card:hover {
+        .example-card:hover {
             transform: translateY(-10px);
         }
         
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            color: var(--color-accent);
+        .example-image-container {
+            position: relative;
+            overflow: hidden;
         }
         
-        .feature-card h3 {
-            font-size: 1.5rem;
+        .example-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .example-card:hover .example-img {
+            transform: scale(1.05);
+        }
+.play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .example-card:hover .play-overlay {
+            opacity: 1;
+        }
+        
+        .play-icon {
+            color: white;
+            font-size: 3rem;
+            background-color: rgba(255, 107, 107, 0.9);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .example-content {
+            padding: 1.8rem;
+        }
+        
+        .example-badges {
+            display: flex;
+            gap: 0.8rem;
             margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .example-badge {
+            background-color: #f0f0f0;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        
+        .featured-badge {
+            background-color: var(--color-primary);
+            color: white;
+        }
+.example-content h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
             color: var(--color-dark);
         }
         
-        .feature-card p {
+        .example-content p {
+            margin-bottom: 1.5rem;
             color: #666;
             line-height: 1.6;
+        }
+        
+        .example-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .example-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .stars {
+            color: #ffba0a;
+        }
+        
+        .rating-text {
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .audio-player {
+            width: 100%;
+            margin-bottom: 1.5rem;
+            border-radius: 50px;
+            height: 40px;
+        }
+        
+        .btn-sm {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+        }
+        
+        .see-more-container {
+            text-align: center;
+        }
+.btn-text {
+            color: var(--color-primary);
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-text:hover {
+            color: #ff5252;
+        }
+        
+        .arrow {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .btn-text:hover .arrow {
+            transform: translateX(5px);
         }
         
         /* Process Section Styles */
@@ -546,8 +681,7 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s ease;
         }
-        
-        .process-step:hover {
+.process-step:hover {
             transform: translateY(-10px);
         }
         
@@ -590,9 +724,355 @@
             text-align: center;
             margin-top: 2rem;
         }
+/* Testimonials Section Styles */
+        .testimonials {
+            background: linear-gradient(135deg, #fff6e5, #ffefd5);
+            padding: 5rem 0;
+        }
         
-        /* FAQ Section Styles */
-        .faq {
+        .testimonials-container {
+            max-width: 1000px;
+            margin: 0 auto 3rem;
+        }
+        
+        .featured-testimonial {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2.5rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        .testimonial-content {
+            position: relative;
+        }
+        
+        .testimonial-quote {
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            font-size: 5rem;
+            color: var(--color-primary);
+            opacity: 0.2;
+            font-family: serif;
+            line-height: 1;
+        }
+.testimonial-text {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            color: #555;
+            font-style: italic;
+        }
+        
+        .testimonial-rating {
+            color: #ffba0a;
+            font-size: 1.2rem;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .testimonial-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--color-primary);
+        }
+        
+        .author-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .testimonial-name {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+            color: var(--color-dark);
+        }
+        
+        .testimonial-location, .testimonial-date {
+            color: #777;
+            font-size: 0.9rem;
+        }
+.testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .testimonial-stats {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+        
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: #666;
+        }
+        
+        .testimonial-cta {
+            text-align: center;
+        }
+.pricing {
+            text-align: center;
+            padding: 5rem 0;
+            background-color: #f9f9f9;
+        }
+        
+        .pricing-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .pricing-card {
+            background-color: white;
+            padding: 2.5rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            flex: 1 1 300px;
+            max-width: 350px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-card.featured {
+            transform: scale(1.05);
+            border: 2px solid var(--color-primary);
+            z-index: 2;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+.pricing-card.featured::before {
+            content: "Más Popular";
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: var(--color-primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transform: translateX(30%) translateY(0%) rotate(45deg);
+            transform-origin: top left;
+            width: 200px;
+            text-align: center;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .pricing-card.featured:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+        
+        .pricing-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-dark);
+        }
+        
+        .pricing-card .price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--color-primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .pricing-card .price span {
+            font-size: 1rem;
+            opacity: 0.7;
+        }
+.pricing-card ul {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        
+        .pricing-card li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .pricing-card li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--color-secondary);
+            font-weight: bold;
+        }
+.contact {
+            background-color: #f9f9f9;
+            padding: 5rem 0;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        
+        .contact-info {
+            padding: 2rem;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-primary);
+        }
+        
+        .contact-info p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        .contact-info .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-icon {
+            margin-right: 1rem;
+            color: var(--color-primary);
+            font-size: 1.5rem;
+        }
+.contact-form {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #444;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+footer {
+            background-color: var(--color-dark);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-link {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background-color: var(--color-primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-nav {
+            margin: 2rem 0;
+        }
+        
+        .footer-nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-nav a:hover {
+            color: var(--color-primary);
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            opacity: 0.7;
+        }
+.faq {
             padding: 5rem 0;
             background-color: #fff;
         }
@@ -661,401 +1141,34 @@
             max-height: 1000px;
             padding: 0;
         }
-        
-        /* Testimonials Section Styles */
-        .testimonials {
-            background: linear-gradient(135deg, #fff6e5, #ffefd5);
-            padding: 5rem 0;
+/* Responsive styles */
+        @media (max-width: 1024px) {
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .hero-text {
+                text-align: center;
+                margin-bottom: 2rem;
+            }
+            
+            .hero-text h2 {
+                text-align: center;
+            }
+            
+            .hero-features {
+                align-items: center;
+            }
+            
+            .special-offer {
+                padding: 2.5rem 1.5rem;
+            }
+            
+            .offer-description {
+                max-width: 100%;
+            }
         }
         
-        .testimonials-container {
-            max-width: 1000px;
-            margin: 0 auto 3rem;
-        }
-        
-        .featured-testimonial {
-            background-color: white;
-            padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2.5rem;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-        
-        .testimonial-content {
-            position: relative;
-        }
-        
-        .testimonial-quote {
-            position: absolute;
-            top: -20px;
-            left: -10px;
-            font-size: 5rem;
-            color: var(--color-primary);
-            opacity: 0.2;
-            font-family: serif;
-            line-height: 1;
-        }
-        
-        .testimonial-text {
-            font-size: 1.2rem;
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-            color: #555;
-            font-style: italic;
-        }
-        
-        .testimonial-rating {
-            color: #ffba0a;
-            font-size: 1.2rem;
-        }
-        
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-        
-        .testimonial-img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--color-primary);
-        }
-        
-        .author-info {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .testimonial-name {
-            font-weight: bold;
-            font-size: 1.2rem;
-            margin-bottom: 0.3rem;
-            color: var(--color-dark);
-        }
-        
-        .testimonial-location, .testimonial-date {
-            color: #777;
-            font-size: 0.9rem;
-        }
-        
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .testimonial-card {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        
-        .testimonial-stats {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 3rem;
-            margin: 3rem 0;
-        }
-        
-        .stat-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        
-        .stat-value {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: var(--color-primary);
-            margin-bottom: 0.5rem;
-        }
-        
-        .stat-label {
-            font-size: 1.1rem;
-            color: #666;
-        }
-        
-        .testimonial-cta {
-            text-align: center;
-        }
-        
-        /* Pricing Section Styles */
-        .pricing {
-            background-color: #f9f9f9;
-            padding: 5rem 0;
-        }
-        
-        .pricing-cards {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .pricing-card {
-            background-color: white;
-            padding: 2.5rem;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-            flex: 1 1 300px;
-            max-width: 350px;
-            transition: transform 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .pricing-card.featured {
-            transform: scale(1.05);
-            border: 2px solid var(--color-primary);
-        }
-        
-        .pricing-card.featured::before {
-            content: "Más Popular";
-            position: absolute;
-            top: 0;
-            right: 0;
-            background-color: var(--color-primary);
-            color: white;
-            padding: 0.5rem 1.5rem;
-            font-size: 0.9rem;
-            font-weight: bold;
-            transform: translateX(30%) translateY(0%) rotate(45deg);
-            transform-origin: top left;
-            width: 200px;
-            text-align: center;
-        }
-        
-        .pricing-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .pricing-card.featured:hover {
-            transform: translateY(-10px) scale(1.05);
-        }
-        
-        .pricing-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--color-dark);
-        }
-        
-        .pricing-card .price {
-            font-size: 3rem;
-            font-weight: bold;
-            color: var(--color-primary);
-            margin-bottom: 1.5rem;
-        }
-        
-        .pricing-card .price span {
-            font-size: 1rem;
-            opacity: 0.7;
-        }
-        
-        .pricing-card ul {
-            list-style: none;
-            margin: 2rem 0;
-            text-align: left;
-        }
-        
-        .pricing-card li {
-            margin-bottom: 1rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-        
-        .pricing-card li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--color-secondary);
-            font-weight: bold;
-        }
-        
-        /* Contact Section */
-        .contact {
-            background-color: #f9f9f9;
-        }
-        
-        .contact-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-        }
-        
-        .contact-info {
-            padding: 2rem;
-        }
-        
-        .contact-info h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--color-primary);
-        }
-        
-        .contact-info p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-        
-        .contact-info .contact-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        
-        .contact-icon {
-            margin-right: 1rem;
-            color: var(--color-primary);
-            font-size: 1.5rem;
-        }
-        
-        .contact-form {
-            background-color: white;
-            padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-        
-        .form-control:focus {
-            outline: none;
-            border-color: var(--color-primary);
-        }
-        
-        textarea.form-control {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        /* Payment Styles */
-        #payment-section {
-            margin-top: 30px;
-        }
-        
-        #form-checkout {
-            display: flex;
-            flex-direction: column;
-            max-width: 600px;
-        }
-        
-        .container.card-field {
-            height: 18px;
-            display: inline-block;
-            border: 1px solid rgb(118, 118, 118);
-            border-radius: 2px;
-            padding: 1px 2px;
-            margin-bottom: 8px;
-            background: white;
-        }
-        
-        #form-checkout input,
-        #form-checkout select {
-            margin-bottom: 8px;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        
-        .form-label {
-            margin-bottom: 5px;
-            display: block;
-            font-weight: 500;
-        }
-        
-        .progress-bar {
-            width: 100%;
-            margin-top: 10px;
-        }
-        
-        /* Footer Styles */
-        footer {
-            background-color: var(--color-dark);
-            color: white;
-            text-align: center;
-            padding: 3rem 0;
-        }
-        
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 1.5rem;
-            margin: 1.5rem 0;
-        }
-        
-        .social-link {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-        
-        .social-link:hover {
-            background-color: var(--color-primary);
-            transform: translateY(-3px);
-        }
-        
-        .footer-nav {
-            margin: 2rem 0;
-        }
-        
-        .footer-nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 1rem;
-            transition: color 0.3s ease;
-        }
-        
-        .footer-nav a:hover {
-            color: var(--color-primary);
-        }
-        
-        .copyright {
-            margin-top: 2rem;
-            opacity: 0.7;
-        }
-        
-        /* Responsive Styles */
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5rem;
@@ -1074,6 +1187,10 @@
                 margin-bottom: 0.5rem;
             }
             
+            .section-title {
+                font-size: 2rem;
+            }
+            
             .countdown-item {
                 min-width: 60px;
                 padding: 0.8rem;
@@ -1090,17 +1207,71 @@
             .offer-badge {
                 width: 80px;
                 height: 80px;
-                font-size: 0.9rem;
-                top: -10px;
-                right: -10px;
+                font-size: 1rem;
+                top: -15px;
+                right: -15px;
             }
             
-            .hero-content {
+            .discount-price {
+                font-size: 2.5rem;
+            }
+            
+            .ribbon {
+                width: 120px;
+                font-size: 0.8rem;
+            }
+            
+            .featured-testimonial {
+                padding: 1.5rem;
+            }
+            
+            .testimonial-quote {
+                font-size: 3rem;
+            }
+            
+            .testimonial-stats {
+                gap: 1.5rem;
+            }
+            
+            .stat-value {
+                font-size: 2rem;
+            }
+            
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .countdown {
+                gap: 0.5rem;
+            }
+            
+            .countdown-item {
+                min-width: 50px;
+                padding: 0.6rem;
+            }
+            
+            .countdown-value {
+                font-size: 1.2rem;
+            }
+            
+            .countdown-label {
+                font-size: 0.7rem;
+            }
+            
+            .testimonial-author {
                 flex-direction: column;
+                text-align: center;
             }
             
-            .pricing-card.featured {
-                transform: scale(1);
+            .testimonial-img {
+                margin-bottom: 1rem;
+            }
+            
+            .trust-badges {
+                flex-direction: column;
+                gap: 0.5rem;
             }
         }
     </style>
@@ -1127,8 +1298,7 @@
             <li><a href="#contact">Contacto</a></li>
         </ul>
     </nav>
-    
-    <section id="home" class="hero">
+<section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
@@ -1168,8 +1338,7 @@
             </div>
         </div>
     </section>
-    
-    <section id="offer">
+<section id="offer">
         <div class="container">
             <h2 class="section-title">Oferta Especial Día de la Madre</h2>
             <div class="special-offer">
@@ -1215,8 +1384,7 @@
                 <a href="#contact" class="btn btn-large">¡Quiero esta oferta!</a>
                 <p class="clients-count"><strong>¡Ya 127 mamás</strong> han recibido su canción!</p>
             </div>
-            
-            <div class="features">
+<div class="features">
                 <div class="feature-card">
                     <div class="feature-icon">🎵</div>
                     <h3>100% Original</h3>
@@ -1235,45 +1403,7 @@
             </div>
         </div>
     </section>
-<section id="process" class="process">
-        <div class="container">
-            <h2 class="section-title">Cómo Creamos Tu Canción</h2>
-            <p class="section-subtitle">Un proceso simple para un regalo extraordinario</p>
-            
-            <div class="process-steps">
-                <div class="process-step">
-                    <div class="step-number">1</div>
-                    <div class="step-icon">📝</div>
-                    <h3>Cuéntanos Tu Historia</h3>
-                    <p>Completa nuestro formulario detallando los sentimientos, recuerdos y mensajes que quieres transmitir en la canción.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">2</div>
-                    <div class="step-icon">🎼</div>
-                    <h3>Composición Personalizada</h3>
-                    <p>Nuestros compositores profesionales crean una melodía y letra exclusivas basadas en tu historia.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">3</div>
-                    <div class="step-icon">🎤</div>
-                    <h3>Grabación Profesional</h3>
-                    <p>Cantantes y músicos profesionales dan vida a la canción en nuestro estudio de grabación.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">4</div>
-                    <div class="step-icon">🎁</div>
-                    <h3>Entrega de Tu Canción</h3>
-                    <p>Recibe tu canción lista para sorprender a esa persona especial, junto con la letra impresa.</p>
-                </div>
-            </div>
-            
-            <div class="process-cta">
-                <a href="#contact" class="btn">Comenzar mi canción ahora</a>
-            </div>
-        </div>
-    </section>
-    
-    <section id="examples" class="examples">
+<section id="examples" class="examples">
         <div class="container">
             <h2 class="section-title">Ejemplos de Nuestras Creaciones</h2>
             <p class="section-subtitle">Escucha cómo nuestras canciones tocan el corazón de las personas</p>
@@ -1305,7 +1435,7 @@
                         <a href="#contact" class="btn btn-secondary btn-sm">Quiero algo similar</a>
                     </div>
                 </div>
-                <div class="example-card">
+<div class="example-card">
                     <div class="example-image-container">
                         <img src="/api/placeholder/400/250" alt="Canción Cumpleaños" class="example-img">
                         <div class="play-overlay">
@@ -1365,8 +1495,44 @@
             </div>
         </div>
     </section>
-    
-    <section id="testimonials" class="testimonials">
+<section id="process" class="process">
+        <div class="container">
+            <h2 class="section-title">Cómo Creamos Tu Canción</h2>
+            <p class="section-subtitle">Un proceso simple para un regalo extraordinario</p>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">📝</div>
+                    <h3>Cuéntanos Tu Historia</h3>
+                    <p>Completa nuestro formulario detallando los sentimientos, recuerdos y mensajes que quieres transmitir en la canción.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">🎼</div>
+                    <h3>Composición Personalizada</h3>
+                    <p>Nuestros compositores profesionales crean una melodía y letra exclusivas basadas en tu historia.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">🎤</div>
+                    <h3>Grabación Profesional</h3>
+                    <p>Cantantes y músicos profesionales dan vida a la canción en nuestro estudio de grabación.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">🎁</div>
+                    <h3>Entrega de Tu Canción</h3>
+                    <p>Recibe tu canción lista para sorprender a esa persona especial, junto con la letra impresa.</p>
+                </div>
+            </div>
+            
+            <div class="process-cta">
+                <a href="#contact" class="btn">Comenzar mi canción ahora</a>
+            </div>
+        </div>
+    </section>
+<section id="testimonials" class="testimonials">
         <div class="container">
             <h2 class="section-title">Lo Que Dicen Nuestros Clientes</h2>
             <p class="section-subtitle">Historias reales de emociones auténticas</p>
@@ -1389,8 +1555,7 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="testimonials-grid">
+<div class="testimonials-grid">
                     <div class="testimonial-card">
                         <div class="testimonial-content">
                             <div class="testimonial-quote">"</div>
@@ -1443,8 +1608,7 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="testimonial-stats">
+<div class="testimonial-stats">
                 <div class="stat-item">
                     <span class="stat-value">5,000+</span>
                     <span class="stat-label">Clientes satisfechos</span>
@@ -1499,8 +1663,7 @@
                         <p>¡Por supuesto! Cada paquete incluye un número específico de revisiones: una revisión para el paquete Básico, tres para el Premium y cinco para el Deluxe. Durante estas revisiones, puedes solicitar cambios en la letra, melodía o arreglos musicales para asegurar que la canción sea exactamente como la imaginas.</p>
                     </div>
                 </div>
-                
-                <div class="accordion-item">
+<div class="accordion-item">
                     <button class="accordion-toggle">
                         <span>¿Qué información necesitan para crear mi canción?</span>
                         <span class="accordion-icon">+</span>
@@ -1532,61 +1695,9 @@
             </div>
         </div>
     </section>
-    
-    <section id="pricing" class="pricing">
-        <div class="container">
-            <h2 class="section-title">Nuestros Servicios</h2>
-            <p class="section-subtitle">Elige el paquete que mejor se adapte a tus necesidades</p>
-            <div class="pricing-cards">
-                <div class="pricing-card">
-                    <h3>Canción Básica</h3>
-                    <div class="price">€99 <span>/canción</span></div>
-                    <ul>
-                        <li>Letra personalizada</li>
-                        <li>Grabación profesional</li>
-                        <li>1 revisión incluida</li>
-                        <li>Entrega en 14 días</li>
-                        <li>Archivo digital MP3</li>
-                    </ul>
-                    <a href="#contact" class="btn">Seleccionar</a>
-                </div>
-                <div class="pricing-card featured">
-                    <h3>Canción Premium</h3>
-                    <div class="price">€149 <span>/canción</span></div>
-                    <ul>
-                        <li>Letra personalizada detallada</li>
-                        <li>Grabación profesional</li>
-                        <li>Arreglos musicales avanzados</li>
-                        <li>3 revisiones incluidas</li>
-                        <li>Entrega en 10 días</li>
-                        <li>Archivos digitales MP3 y WAV</li>
-                        <li>Letra impresa en diseño elegante</li>
-                    </ul>
-                    <a href="#contact" class="btn">Seleccionar</a>
-                </div>
-                <div class="pricing-card">
-                    <h3>Canción Deluxe</h3>
-                    <div class="price">€249 <span>/canción</span></div>
-                    <ul>
-                        <li>Letra personalizada premium</li>
-                        <li>Grabación profesional</li>
-                        <li>Arreglos musicales de lujo</li>
-                        <li>5 revisiones incluidas</li>
-                        <li>Entrega en 7 días</li>
-                        <li>Todos los formatos digitales</li>
-                        <li>Videoclip con letra incluido</li>
-                        <li>Empaque físico de regalo</li>
-                    </ul>
-                    <a href="#contact" class="btn">Seleccionar</a>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section id="contact" class="contact">
+<section id="contact" class="contact">
         <div class="container">
             <h2 class="section-title">Crea Tu Canción Personalizada</h2>
-            <p class="section-subtitle">Comienza el viaje hacia el regalo perfecto</p>
             <div class="contact-container">
                 <div class="contact-info">
                     <h3>¿Cómo Funciona?</h3>
@@ -1604,8 +1715,7 @@
                         <span>info@melodiasdelcorazon.com</span>
                     </div>
                 </div>
-                
-                <div class="contact-form">
+<div class="contact-form">
                     <form id="songForm" data-netlify="true" name="song-request">
                         <input type="hidden" name="form-name" value="song-request">
                         <div class="form-group">
@@ -1668,81 +1778,13 @@
                             <textarea id="additional" name="additional" class="form-control" rows="3"></textarea>
                         </div>
                         <!-- Paso inicial del formulario -->
-                        <button type="submit" class="btn" id="checkout-step1">Continuar al pago</button>
+                        <button type="submit" class="btn" id="checkout-step1">Enviar solicitud</button>
                     </form>
-                    
-                    <!-- Formulario de pago con MercadoPago (inicialmente oculto) -->
-                    <div id="payment-section" style="display: none; margin-top: 30px;">
-                        <h3>Realizar Pago</h3>
-                        <style>
-                            #form-checkout {
-                                display: flex;
-                                flex-direction: column;
-                                max-width: 600px;
-                            }
-
-                            .container.card-field {
-                                height: 18px;
-                                display: inline-block;
-                                border: 1px solid rgb(118, 118, 118);
-                                border-radius: 2px;
-                                padding: 1px 2px;
-                                margin-bottom: 8px;
-                                background: white;
-                            }
-                            
-                            #form-checkout input,
-                            #form-checkout select {
-                                margin-bottom: 8px;
-                                padding: 8px;
-                                border: 1px solid #ddd;
-                                border-radius: 5px;
-                            }
-                            
-                            .form-label {
-                                margin-bottom: 5px;
-                                display: block;
-                                font-weight: 500;
-                            }
-                        </style>
-                        <form id="form-checkout">
-                            <label for="form-checkout__cardNumber" class="form-label">Número de tarjeta</label>
-                            <div id="form-checkout__cardNumber" class="container card-field"></div>
-                            
-                            <label for="form-checkout__expirationDate" class="form-label">Fecha de vencimiento</label>
-                            <div id="form-checkout__expirationDate" class="container card-field"></div>
-                            
-                            <label for="form-checkout__securityCode" class="form-label">Código de seguridad</label>
-                            <div id="form-checkout__securityCode" class="container card-field"></div>
-                            
-                            <label for="form-checkout__cardholderName" class="form-label">Titular de la tarjeta</label>
-                            <input type="text" id="form-checkout__cardholderName" placeholder="Titular de la tarjeta" />
-                            
-                            <label for="form-checkout__issuer" class="form-label">Banco emisor</label>
-                            <select id="form-checkout__issuer" placeholder="Banco emisor"></select>
-                            
-                            <label for="form-checkout__installments" class="form-label">Cuotas</label>
-                            <select id="form-checkout__installments" placeholder="Cuotas"></select>
-                            
-                            <label for="form-checkout__identificationType" class="form-label">Tipo de documento</label>
-                            <select id="form-checkout__identificationType" placeholder="Tipo de documento"></select>
-                            
-                            <label for="form-checkout__identificationNumber" class="form-label">Número de documento</label>
-                            <input type="text" id="form-checkout__identificationNumber" placeholder="Número de documento" />
-                            
-                            <label for="form-checkout__cardholderEmail" class="form-label">Email</label>
-                            <input type="email" id="form-checkout__cardholderEmail" placeholder="Email" />
-
-                            <button type="submit" id="form-checkout__submit" class="btn">Pagar</button>
-                            <progress value="0" class="progress-bar" style="width: 100%; margin-top: 10px;">Cargando...</progress>
-                        </form>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
-    
-    <footer>
+<footer>
         <div class="container">
             <div class="footer-content">
                 <h3>MelodíasDelCorazón</h3>
@@ -1818,157 +1860,78 @@
         // Update countdown every second
         const countdownInterval = setInterval(updateCountdown, 1000);
         updateCountdown();
+// Inicializar MercadoPago
+        const mp = new MercadoPago("APP_USR-2679365f-15ee-4ade-9a6f-baee27a3f37e");
         
-        // Inicializar MercadoPago
-        const mp = new MercadoPago("APP_USR-2679365f-15ee-4ade-9a6f-baee27a3f37e"); // Public Key de MercadoPago
-        
-        // Manejo de formulario de solicitud y pago
-        document.getElementById("songForm").addEventListener("submit", function(e) {
+        // Manejo de formulario de solicitud
+        document.getElementById("songForm").addEventListener("submit", async function(e) {
             e.preventDefault();
             
-            // Mostrar sección de pago y ocultar botón de continuar
-            document.getElementById("payment-section").style.display = "block";
-            document.getElementById("checkout-step1").style.display = "none";
+            // Obtener datos del formulario
+            const formData = new FormData(this);
+            const formDataObj = {};
+            formData.forEach((value, key) => {
+                formDataObj[key] = value;
+            });
             
             // Obtener el precio basado en el paquete seleccionado
             const packageSelect = document.getElementById("package");
-            let amount = "99"; // Valor predeterminado
+            let amount = 99; // Valor predeterminado
+            let packageName = "Canción Básica";
             
             if (packageSelect.value === "basic") {
-                amount = "99";
+                amount = 99;
+                packageName = "Canción Básica";
             } else if (packageSelect.value === "premium") {
-                amount = "149";
+                amount = 149;
+                packageName = "Canción Premium";
             } else if (packageSelect.value === "deluxe") {
-                amount = "249";
+                amount = 249;
+                packageName = "Canción Deluxe";
             } else if (packageSelect.value === "mother-special") {
-                amount = "84";
+                amount = 84;
+                packageName = "Especial Día de la Madre";
             }
             
-            // Inicializar formulario de pago con CardForm
-            const cardForm = mp.cardForm({
-                amount: amount,
-                iframe: true,
-                form: {
-                    id: "form-checkout",
-                    cardNumber: {
-                        id: "form-checkout__cardNumber",
-                        placeholder: "Número de tarjeta",
+            // Mostrar spinner o indicador de carga
+            document.getElementById("checkout-step1").textContent = "Procesando...";
+            document.getElementById("checkout-step1").disabled = true;
+            
+            try {
+                // Enviar los datos al servidor para crear una preferencia de MercadoPago
+                const response = await fetch('/.netlify/functions/create-preference', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
                     },
-                    expirationDate: {
-                        id: "form-checkout__expirationDate",
-                        placeholder: "MM/YY",
-                    },
-                    securityCode: {
-                        id: "form-checkout__securityCode",
-                        placeholder: "Código de seguridad",
-                    },
-                    cardholderName: {
-                        id: "form-checkout__cardholderName",
-                        placeholder: "Titular de la tarjeta",
-                    },
-                    issuer: {
-                        id: "form-checkout__issuer",
-                        placeholder: "Banco emisor",
-                    },
-                    installments: {
-                        id: "form-checkout__installments",
-                        placeholder: "Cuotas",
-                    },
-                    identificationType: {
-                        id: "form-checkout__identificationType",
-                        placeholder: "Tipo de documento",
-                    },
-                    identificationNumber: {
-                        id: "form-checkout__identificationNumber",
-                        placeholder: "Número del documento",
-                    },
-                    cardholderEmail: {
-                        id: "form-checkout__cardholderEmail",
-                        placeholder: "E-mail",
-                    },
-                },
-                callbacks: {
-                    onFormMounted: error => {
-                        if (error) return console.warn("Form Mounted handling error: ", error);
-                        console.log("Form mounted");
-                    },
-                    onSubmit: event => {
-                        event.preventDefault();
-
-                        const {
-                            paymentMethodId: payment_method_id,
-                            issuerId: issuer_id,
-                            cardholderEmail: email,
-                            amount,
-                            token,
-                            installments,
-                            identificationNumber,
-                            identificationType,
-                        } = cardForm.getCardFormData();
-
-                        // Mostrar indicador de carga
-                        const progressBar = document.querySelector(".progress-bar");
-                        progressBar.removeAttribute("value");
-                        
-                        // Aquí deberías enviar los datos al backend
-                        fetch("/process_payment", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify({
-                                token,
-                                issuer_id,
-                                payment_method_id,
-                                transaction_amount: Number(amount),
-                                installments: Number(installments),
-                                description: "Canción personalizada - MelodíasDelCorazón",
-                                payer: {
-                                    email,
-                                    identification: {
-                                        type: identificationType,
-                                        number: identificationNumber,
-                                    },
-                                },
-                            }),
-                        })
-                        .then(response => response.json())
-                        .then(result => {
-                            // Aquí manejas la respuesta del servidor
-                            if (result.status === "approved") {
-                                alert("¡Pago aprobado! Gracias por tu compra. Nos pondremos en contacto contigo pronto.");
-                                window.location.href = "#home"; // Redirigir al inicio
-                            } else {
-                                alert("Hubo un problema con el pago. Por favor, intenta nuevamente.");
-                                progressBar.setAttribute("value", "0");
-                            }
-                        })
-                        .catch(error => {
-                            // Para propósitos de prueba, simulamos un pago exitoso
-                            // En producción, deberías manejar correctamente el error
-                            console.error("Error en el pago:", error);
-                            setTimeout(() => {
-                                alert("¡Pago aprobado! Gracias por tu compra. Nos pondremos en contacto contigo pronto.");
-                                window.location.href = "#home"; // Redirigir al inicio
-                            }, 2000);
-                        });
-                    },
-                    onFetching: (resource) => {
-                        console.log("Fetching resource: ", resource);
-
-                        // Animate progress bar
-                        const progressBar = document.querySelector(".progress-bar");
-                        progressBar.removeAttribute("value");
-
-                        return () => {
-                            progressBar.setAttribute("value", "0");
-                        };
-                    }
-                },
-            });
+                    body: JSON.stringify({
+                        title: packageName,
+                        price: amount,
+                        quantity: 1,
+                        email: formDataObj.email,
+                        description: "Canción personalizada - MelodíasDelCorazón"
+                    }),
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Error al crear la preferencia de pago');
+                }
+                
+                const data = await response.json();
+                
+                // Redirigir al usuario a la página de pago de MercadoPago
+                window.location.href = data.init_point;
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Hubo un problema al procesar tu solicitud. Por favor, intenta nuevamente.');
+                
+                // Restaurar el botón
+                document.getElementById("checkout-step1").textContent = "Enviar solicitud";
+                document.getElementById("checkout-step1").disabled = false;
+            }
         });
-        
-        // Smooth scrolling for navigation links
+// Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1993,14 +1956,21 @@
             deadlineInput.min = `${yyyy}-${mm}-${dd}`;
         }
         
-        // Actualizar el email del formulario de pago con el email del formulario de solicitud
-        document.getElementById('email').addEventListener('input', function() {
-            const email = this.value;
-            const mpEmail = document.getElementById('form-checkout__cardholderEmail');
-            if (mpEmail) {
-                mpEmail.value = email;
-            }
-        });
+        // Animación de aparición al hacer scroll
+        function revealOnScroll() {
+            const elements = document.querySelectorAll('.feature-card, .example-card, .process-step, .testimonial-card, .pricing-card');
+            const windowHeight = window.innerHeight;
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('revealed');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
         
         // Simulación de reproducción de audio
         document.querySelectorAll('.play-overlay, .play-button').forEach(button => {
@@ -2009,6 +1979,15 @@
                 // Aquí se podría implementar la lógica real de reproducción
             });
         });
+        
+        // Netlify Forms handler
+        const form = document.querySelector('#songForm');
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                // Podemos permitir que Netlify maneje el envío del formulario
+                // Y luego redirigir a MercadoPago
+            });
+        }
     </script>
 </body>
 </html>
