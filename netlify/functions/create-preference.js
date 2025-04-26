@@ -27,6 +27,13 @@ exports.handler = async function(event, context) {
       payer: {
         email: email,
       },
+      // Permitir pagos como invitado (sin cuenta de MercadoPago)
+      binary_mode: true,
+      // Configuración para mostrar todos los métodos de pago disponibles
+      payment_methods: {
+        excluded_payment_types: [],
+        installments: 12
+      },
       back_urls: {
         success: `${process.env.URL}/success`,
         failure: `${process.env.URL}/failure`,
@@ -59,7 +66,7 @@ exports.handler = async function(event, context) {
     console.error('Error:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Error al crear la preferencia de pago' })
+      body: JSON.stringify({ error: 'Error al crear la preferencia de pago', details: error.message })
     };
   }
 };
