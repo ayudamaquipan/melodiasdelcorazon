@@ -1,0 +1,27 @@
+[build]
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+# Configuración de redirección para la función
+[[redirects]]
+  from = "/process_payment"
+  to = "/.netlify/functions/create-preference"
+  status = 200
+
+# Configuración para páginas de éxito/error
+[[redirects]]
+  from = "/success"
+  to = "/success.html"
+  status = 200
+
+[[redirects]]
+  from = "/failure"
+  to = "/failure.html"
+  status = 200
+
+[[redirects]]
+  from = "/pending"
+  to = "/pending.html"
+  status = 200
