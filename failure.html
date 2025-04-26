@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago No Completado - MelodíasDelCorazón</title>
+    <style>
+        :root {
+            --color-primary: #ff6b6b;
+            --color-secondary: #4ecdc4;
+            --color-dark: #292f36;
+            --color-light: #f7fff7;
+            --color-accent: #ff9f1c;
+            --color-danger: #e74c3c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--color-light);
+            color: var(--color-dark);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--color-primary), #ff9191);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .failure-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .failure-icon {
+            width: 100px;
+            height: 100px;
+            background-color: var(--color-danger);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 3rem;
+        }
+        
+        h1 {
+            color: var(--color-dark);
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+        }
+        
+        p {
+            color: #555;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .reasons {
+            background-color: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        
+        .reason {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .reason:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--color-primary);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 0.5rem;
+        }
+        
+        .btn:hover {
+            background-color: #ff5252;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-secondary {
+            background-color: #7f8c8d;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #6c7a7d;
+        }
+        
+        .contact-info {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background-color: #f0f9ff;
+            border-radius: 10px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-icon {
+            margin-right: 0.5rem;
+            color: var(--color-primary);
+        }
+        
+        footer {
+            background-color: var(--color-dark);
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .failure-card {
+                padding: 2rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>MelodíasDelCorazón</h1>
+    </header>
+    
+    <div class="container">
+        <div class="failure-card">
+            <div class="failure-icon">✕</div>
+            <h1>El pago no pudo completarse</h1>
+            <p>Lamentamos informarte que tu pago no ha podido ser procesado correctamente. No te preocupes, no se ha realizado ningún cargo a tu cuenta.</p>
+            
+            <div class="reasons">
+                <h3>Posibles razones:</h3>
+                <div class="reason">
+                    <p><strong>Fondos insuficientes</strong> - Asegúrate de tener fondos disponibles en tu tarjeta.</p>
+                </div>
+                <div class="reason">
+                    <p><strong>Datos incorrectos</strong> - Verifica que todos los datos de tu tarjeta sean correctos.</p>
+                </div>
+                <div class="reason">
+                    <p><strong>Límites de la tarjeta</strong> - Es posible que hayas excedido el límite de tu tarjeta.</p>
+                </div>
+                <div class="reason">
+                    <p><strong>Banco emisor</strong> - Tu banco puede haber rechazado la transacción por motivos de seguridad.</p>
+                </div>
+            </div>
+            
+            <h2>¿Qué puedes hacer ahora?</h2>
+            <p>Puedes intentar nuevamente con otra tarjeta o método de pago, o contactarnos directamente si necesitas ayuda.</p>
+            
+            <div>
+                <a href="/#contact" class="btn">Intentar nuevamente</a>
+                <a href="mailto:info@melodiasdelcorazon.com" class="btn btn-secondary">Contactarnos</a>
+            </div>
+            
+            <div class="contact-info">
+                <h3>¿Necesitas ayuda?</h3>
+                <p>Nuestro equipo de atención al cliente está disponible para asistirte:</p>
+                <div class="contact-item">
+                    <span class="contact-icon">📱</span>
+                    <span>+34 600 123 456</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">✉️</span>
+                    <span>info@melodiasdelcorazon.com</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 MelodíasDelCorazón. Todos los derechos reservados.</p>
+    </footer>
+    
+    <script>
+        // Puedes agregar código aquí para rastrear información sobre el error
+        const urlParams = new URLSearchParams(window.location.search);
+        const errorType = urlParams.get('error');
+        console.log('Error type:', errorType);
+        
+        // Si quisieras mostrar información específica sobre el error
+        if (errorType) {
+            // Aquí podrías personalizar el mensaje según el tipo de error
+        }
+    </script>
+</body>
+</html>
