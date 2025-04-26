@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MelodíasDelCorazón - Canciones Personalizadas</title>
+    <style>
+        :root {
+            --color-primary: #ff6b6b;
+            --color-secondary: #4ecdc4;
+            --color-dark: #292f36;
+            --color-light: #f7fff7;
+            --color-accent: #ff9f1c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--color-light);
+            color: var(--color-dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--color-primary);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/api/placeholder/1200/400') center/cover;
+            opacity: 0.2;
+            z-index: 0;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        nav {
+            background-color: var(--color-dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--color-accent);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            padding: 4rem 0;
+            scroll-margin-top: 5rem;
+        }
+        
+        section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--color-primary);
+            position: relative;
+        }
+        
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background-color: var(--color-accent);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--color-primary);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:hover {
+            background-color: #ff5252;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-secondary {
+            background-color: var(--color-secondary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #3dbfb3;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #fff6e5, #ffefd5);
+        }
+        
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .special-offer {
+            background-color: #fff;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin: 2rem auto;
+            max-width: 900px;
+            border: 3px dashed var(--color-accent);
+            position: relative;
+        }
+        
+        .offer-badge {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            background-color: var(--color-accent);
+            color: white;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transform: rotate(15deg);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .special-offer h3 {
+            font-size: 2rem;
+            color: var(--color-primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .special-offer p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--color-accent);
+            margin: 1rem 0;
+        }
+        
+        .original-price {
+            text-decoration: line-through;
+            opacity: 0.7;
+            margin-right: 1rem;
+        }
+        
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .feature-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            flex: 1 1 300px;
+            max-width: 350px;
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-primary);
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .examples {
+            background-color: #f9f9f9;
+        }
+        
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .example-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .example-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .example-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .example-content {
+            padding: 1.5rem;
+        }
+        
+        .example-content h3 {
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+        }
+        
+        .example-content p {
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+        
+        .pricing {
+            text-align: center;
+        }
+        
+        .pricing-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .pricing-card {
+            background-color: white;
+            padding: 2.5rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            flex: 1 1 300px;
+            max-width: 350px;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-card.featured {
+            transform: scale(1.05);
+            border: 2px solid var(--color-primary);
+        }
+        
+        .pricing-card.featured::before {
+            content: "Más Popular";
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: var(--color-primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transform: translateX(30%) translateY(0%) rotate(45deg);
+            transform-origin: top left;
+            width: 200px;
+            text-align: center;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .pricing-card.featured:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+        
+        .pricing-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-dark);
+        }
+        
+        .pricing-card .price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--color-primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .pricing-card .price span {
+            font-size: 1rem;
+            opacity: 0.7;
+        }
+        
+        .pricing-card ul {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        
+        .pricing-card li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .pricing-card li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--color-secondary);
+            font-weight: bold;
+        }
+        
+        .contact {
+            background-color: #f9f9f9;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        
+        .contact-info {
+            padding: 2rem;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-primary);
+        }
+        
+        .contact-info p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .contact-info .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-icon {
+            margin-right: 1rem;
+            color: var(--color-primary);
+            font-size: 1.5rem;
+        }
+        
+        .contact-form {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        footer {
+            background-color: var(--color-dark);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-link {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background-color: var(--color-primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-nav {
+            margin: 2rem 0;
+        }
+        
+        .footer-nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-nav a:hover {
+            color: var(--color-primary);
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            opacity: 0.7;
+        }
+        
+        /* Countdown Timer */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+            gap: 1rem;
+        }
+        
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: var(--color-dark);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            min-width: 80px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .countdown-value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        .countdown-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            background: linear-gradient(135deg, #fff6e5, #ffefd5);
+            padding: 5rem 0;
+        }
+        
+        .testimonial-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .testimonial {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .testimonial-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .testimonial-text::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--color-primary);
+            opacity: 0.2;
+            position: absolute;
+            top: -2rem;
+            left: -1rem;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .testimonial-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 3px solid var(--color-primary);
+        }
+        
+        .testimonial-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .testimonial-role {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin-bottom: 0.5rem;
+            }
+            
+            .countdown-item {
+                min-width: 60px;
+                padding: 0.8rem;
+            }
+            
+            .countdown-value {
+                font-size: 1.5rem;
+            }
+            
+            .special-offer {
+                padding: 2rem 1rem;
+            }
+            
+            .offer-badge {
+                width: 80px;
+                height: 80px;
+                font-size: 0.9rem;
+                top: -10px;
+                right: -10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>MelodíasDelCorazón</h1>
+            <p class="tagline">Canciones personalizadas que expresan lo que las palabras no pueden</p>
+            <a href="#contact" class="btn">Crea tu canción ahora</a>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#home">Inicio</a></li>
+            <li><a href="#offer">Oferta Especial</a></li>
+            <li><a href="#examples">Ejemplos</a></li>
+            <li><a href="#pricing">Precios</a></li>
+            <li><a href="#testimonials">Testimonios</a></li>
+            <li><a href="#contact">Contacto</a></li>
+        </ul>
+    </nav>
+    
+    <section id="home" class="hero">
+        <div class="container">
+            <h2>Regala una canción única para esa persona especial</h2>
+            <p>¿Buscas un regalo inolvidable que toque el corazón? Creamos canciones personalizadas que capturan sentimientos, historias y momentos especiales. Nuestro equipo de compositores profesionales transformará tus palabras en melodías que perdurarán para siempre.</p>
+            <a href="#offer" class="btn">Ver Oferta Especial</a>
+        </div>
+    </section>
+    
+    <section id="offer">
+        <div class="container">
+            <h2>Oferta Especial Día de la Madre</h2>
+            <div class="special-offer">
+                <div class="offer-badge">¡30% OFF!</div>
+                <h3>¡Sorprende a Mamá con una Canción Única!</h3>
+                <p>Aprovecha nuestra oferta especial por el Día de la Madre y regala una canción personalizada que celebre todo lo que ella significa para ti. ¡Un regalo que tocará su corazón y creará un recuerdo para toda la vida!</p>
+                
+                <div class="countdown">
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="days">14</span>
+                        <span class="countdown-label">Días</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="hours">23</span>
+                        <span class="countdown-label">Horas</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="minutes">59</span>
+                        <span class="countdown-label">Minutos</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="seconds">59</span>
+                        <span class="countdown-label">Segundos</span>
+                    </div>
+                </div>
+                
+                <div class="price">
+                    <span class="original-price">€120</span>€84
+                </div>
+                <p>* Oferta válida hasta el 5 de mayo de 2025</p>
+                <a href="#contact" class="btn">¡Quiero esta oferta!</a>
+            </div>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">🎵</div>
+                    <h3>100% Original</h3>
+                    <p>Cada canción es compuesta exclusivamente para ti, basada en tus historias y sentimientos.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎤</div>
+                    <h3>Voces Profesionales</h3>
+                    <p>Contamos con cantantes profesionales que darán vida a tu canción con emoción y calidad.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎸</div>
+                    <h3>Múltiples Estilos</h3>
+                    <p>Desde baladas románticas hasta pop alegre, adaptamos el estilo musical a tus preferencias.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="examples" class="examples">
+        <div class="container">
+            <h2>Ejemplos de Nuestras Creaciones</h2>
+            <div class="examples-grid">
+                <div class="example-card">
+                    <img src="/api/placeholder/400/250" alt="Canción de Amor" class="example-img">
+                    <div class="example-content">
+                        <h3>Para Mi Alma Gemela</h3>
+                        <p>Canción romántica compuesta para un aniversario de bodas de plata.</p>
+                        <audio controls>
+                            <source src="#" type="audio/mpeg">
+                            Tu navegador no soporta el elemento de audio.
+                        </audio>
+                    </div>
+                </div>
+                <div class="example-card">
+                    <img src="/api/placeholder/400/250" alt="Canción Cumpleaños" class="example-img">
+                    <div class="example-content">
+                        <h3>Celebrando Tus 50</h3>
+                        <p>Canción alegre creada para un cumpleaños especial con recuerdos familiares.</p>
+                        <audio controls>
+                            <source src="#" type="audio/mpeg">
+                            Tu navegador no soporta el elemento de audio.
+                        </audio>
+                    </div>
+                </div>
+                <div class="example-card">
+                    <img src="/api/placeholder/400/250" alt="Canción Madre" class="example-img">
+                    <div class="example-content">
+                        <h3>Gracias, Mamá</h3>
+                        <p>Emotiva balada creada para agradecer a una madre por su amor incondicional.</p>
+                        <audio controls>
+                            <source src="#" type="audio/mpeg">
+                            Tu navegador no soporta el elemento de audio.
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2>Nuestros Servicios</h2>
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <h3>Canción Básica</h3>
+                    <div class="price">€99 <span>/canción</span></div>
+                    <ul>
+                        <li>Letra personalizada</li>
+                        <li>Grabación profesional</li>
+                        <li>1 revisión incluida</li>
+                        <li>Entrega en 14 días</li>
+                        <li>Archivo digital MP3</li>
+                    </ul>
+                    <a href="#contact" class="btn">Seleccionar</a>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>Canción Premium</h3>
+                    <div class="price">€149 <span>/canción</span></div>
+                    <ul>
+                        <li>Letra personalizada detallada</li>
+                        <li>Grabación profesional</li>
+                        <li>Arreglos musicales avanzados</li>
+                        <li>3 revisiones incluidas</li>
+                        <li>Entrega en 10 días</li>
+                        <li>Archivos digitales MP3 y WAV</li>
+                        <li>Letra impresa en diseño elegante</li>
+                    </ul>
+                    <a href="#contact" class="btn">Seleccionar</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Canción Deluxe</h3>
+                    <div class="price">€249 <span>/canción</span></div>
+                    <ul>
+                        <li>Letra personalizada premium</li>
+                        <li>Grabación profesional</li>
+                        <li>Arreglos musicales de lujo</li>
+                        <li>5 revisiones incluidas</li>
+                        <li>Entrega en 7 días</li>
+                        <li>Todos los formatos digitales</li>
+                        <li>Videoclip con letra incluido</li>
+                        <li>Empaque físico de regalo</li>
+                    </ul>
+                    <a href="#contact" class="btn">Seleccionar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2>Lo Que Dicen Nuestros Clientes</h2>
+            <div class="testimonial-container">
+                <div class="testimonial">
+                    <p class="testimonial-text">La canción que crearon para el cumpleaños de mi madre fue simplemente perfecta. Ella lloró al escucharla y ahora la reproduce constantemente. ¡Gracias por crear un recuerdo tan especial!</p>
+                    <div class="testimonial-author">
+                        <img src="/api/placeholder/100/100" alt="Cliente" class="testimonial-img">
+                        <p class="testimonial-name">Laura Martínez</p>
+                        <p class="testimonial-role">Madrid</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Crea Tu Canción Personalizada</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>¿Cómo Funciona?</h3>
+                    <p>1. <strong>Cuéntanos tu historia</strong> - Completa el formulario con todos los detalles importantes que quieres incluir en tu canción.</p>
+                    <p>2. <strong>Proceso creativo</strong> - Nuestro equipo de compositores trabajará en tu canción personalizada basada en tu historia.</p>
+                    <p>3. <strong>Revisión</strong> - Te enviaremos un borrador para que nos des tu opinión y realizaremos los ajustes necesarios.</p>
+                    <p>4. <strong>Entrega final</strong> - Recibirás tu canción terminada, lista para sorprender a esa persona especial.</p>
+                    
+                    <div class="contact-item">
+                        <span class="contact-icon">📱</span>
+                        <span>+34 600 123 456</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">✉️</span>
+                        <span>info@melodiasdelcorazon.com</span>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="songForm">
+                        <div class="form-group">
+                            <label for="name">Nombre completo</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Teléfono</label>
+                            <input type="tel" id="phone" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="occasion">Ocasión</label>
+                            <select id="occasion" class="form-control" required>
+                                <option value="">Selecciona una ocasión</option>
+                                <option value="mother">Día de la Madre</option>
+                                <option value="birthday">Cumpleaños</option>
+                                <option value="anniversary">Aniversario</option>
+                                <option value="wedding">Boda</option>
+                                <option value="valentine">San Valentín</option>
+                                <option value="other">Otra ocasión</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="style">Estilo musical preferido</label>
+                            <select id="style" class="form-control" required>
+                                <option value="">Selecciona un estilo</option>
+                                <option value="ballad">Balada</option>
+                                <option value="pop">Pop</option>
+                                <option value="rock">Rock suave</option>
+                                <option value="folk">Folk/Acústico</option>
+                                <option value="latinpop">Pop Latino</option>
+                                <option value="rnb">R&B</option>
+                                <option value="other">Otro estilo</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Cuéntanos tu historia (detalles para la letra)</label>
+                            <textarea id="description" class="form-control" rows="5" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="package">Selecciona tu paquete</label>
+                            <select id="package" class="form-control" required>
+                                <option value="">Selecciona un paquete</option>
+                                <option value="basic">Canción Básica - €99</option>
+                                <option value="premium">Canción Premium - €149</option>
+                                <option value="deluxe">Canción Deluxe - €249</option>
+                                <option value="mother-special">Especial Día de la Madre - €84</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="deadline">¿Cuándo necesitas la canción?</label>
+                            <input type="date" id="deadline" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="additional">Información adicional</label>
+                            <textarea id="additional" class="form-control" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn">Enviar solicitud</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3>MelodíasDelCorazón</h3>
+                <p>Transformamos historias en melodías inolvidables</p>
+                
+                <div class="social-links">
+                    <a href="#" class="social-link">FB</a>
+                    <a href="#" class="social-link">IG</a>
+                    <a href="#" class="social-link">YT</a>
+                    <a href="#" class="social-link">TW</a>
+                </div>
+                
+                <div class="footer-nav">
+                    <a href="#home">Inicio</a>
+                    <a href="#offer">Oferta Especial</a>
+                    <a href="#examples">Ejemplos</a>
+                    <a href="#pricing">Precios</a>
+                    <a href="#contact">Contacto</a>
+                </div>
+                
+                <p class="copyright">&copy; 2025 MelodíasDelCorazón. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Countdown Timer for Special Offer
+        function updateCountdown() {
+            const targetDate = new Date("2025-05-05T23:59:59").getTime();
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+            
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+            
+            document.getElementById("days").innerText = days;
+            document.getElementById("hours").innerText = hours;
+            document.getElementById("minutes").innerText = minutes;
+            document.getElementById("seconds").innerText = seconds;
+            
+            if (difference < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("days").innerText = "0";
+                document.getElementById("hours").innerText = "0";
+                document.getElementById("minutes").innerText = "0";
+                document.getElementById("seconds").innerText = "0";
+            }
+        }
+        
+        // Update countdown every second
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        updateCountdown();
+        
+        // Form submission
+        document.getElementById("songForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            
+            // Here you would typically send the form data to your server
+            // For now, we'll just show an alert
+            alert("¡Gracias por tu solicitud! Nos pondremos en contacto contigo pronto.");
+            
+            // You could redirect to a thank you page or clear the form
+            this.reset();
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Set minimum date for deadline input (today + 7 days)
+        const deadlineInput = document.getElementById('deadline');
+        if (deadlineInput) {
+            const today = new Date();
+            const minDate = new Date(today);
+            minDate.setDate(today.getDate() + 7);
+            
+            const yyyy = minDate.getFullYear();
+            const mm = String(minDate.getMonth() + 1).padStart(2, '0');
+            const dd = String(minDate.getDate()).padStart(2, '0');
+            
+            deadlineInput.min = `${yyyy}-${mm}-${dd}`;
+        }
+        
+        // Optional: Add any additional JavaScript functionality below
+        // For example, you could add functionality to play sample songs,
+        // implement form validation, create a dynamic testimonial slider, etc.
+    </script>
+</body>
+</html>
