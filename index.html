@@ -857,7 +857,8 @@
                 </div>
                 
                 <div class="contact-form">
-                    <form id="songForm">
+                    <form id="songForm" data-netlify="true" name="song-request">
+    			<input type="hidden" name="form-name" value="song-request">
                         <div class="form-group">
                             <label for="name">Nombre completo</label>
                             <input type="text" id="name" class="form-control" required>
