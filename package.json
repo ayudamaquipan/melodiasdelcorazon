@@ -1,0 +1,8 @@
+{
+  "name": "melodiasdelcorazon",
+  "version": "1.0.0",
+  "description": "Sitio web para vender canciones personalizadas",
+  "dependencies": {
+    "axios": "^1.6.2"
+  }
+}
