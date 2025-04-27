@@ -1893,8 +1893,18 @@ document.getElementById("songForm").addEventListener("submit", async function(e)
     document.getElementById("checkout-step1").disabled = true;
     
     try {
-        // Aquí usaríamos Netlify Forms para enviar el formulario
-        // No es necesario código adicional ya que el formulario tiene data-netlify="true"
+        // Enviar los datos al servidor para enviar notificación por correo
+        const emailResponse = await fetch('/.netlify/functions/send-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formDataObj),
+        });
+        
+        if (!emailResponse.ok) {
+            console.warn('Advertencia: El correo no pudo ser enviado');
+        }
         
         // Mostrar mensaje de confirmación y enlace de pago
         const formContainer = document.querySelector(".contact-form");
@@ -1915,7 +1925,7 @@ document.getElementById("songForm").addEventListener("submit", async function(e)
                 </a>
                 
                 <p style="margin-top: 1.5rem; font-size: 0.9rem; color: #666;">
-                    Nota: Por favor, incluye tu nombre en la descripción del pago para poder asociarlo con tu solicitud.
+                    Nota: Por favor, incluye tu nombre <strong>(${formDataObj.name})</strong> en la descripción del pago para poder asociarlo con tu solicitud.
                 </p>
             </div>
         `;
