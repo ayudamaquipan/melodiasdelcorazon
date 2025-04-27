@@ -1863,74 +1863,75 @@ footer {
 // Inicializar MercadoPago
         const mp = new MercadoPago("APP_USR-1f803242-043c-4e0a-afd9-1e52a0e70b70");
         
-        // Manejo de formulario de solicitud
-        document.getElementById("songForm").addEventListener("submit", async function(e) {
-            e.preventDefault();
-            
-            // Obtener datos del formulario
-            const formData = new FormData(this);
-            const formDataObj = {};
-            formData.forEach((value, key) => {
-                formDataObj[key] = value;
-            });
-            
-            // Obtener el precio basado en el paquete seleccionado
-            const packageSelect = document.getElementById("package");
-            let amount = 99; // Valor predeterminado
-            let packageName = "Canción Básica";
-            
-            if (packageSelect.value === "basic") {
-                amount = 99;
-                packageName = "Canción Básica";
-            } else if (packageSelect.value === "premium") {
-                amount = 149;
-                packageName = "Canción Premium";
-            } else if (packageSelect.value === "deluxe") {
-                amount = 249;
-                packageName = "Canción Deluxe";
-            } else if (packageSelect.value === "mother-special") {
-                amount = 84;
-                packageName = "Especial Día de la Madre";
-            }
-            
-            // Mostrar spinner o indicador de carga
-            document.getElementById("checkout-step1").textContent = "Procesando...";
-            document.getElementById("checkout-step1").disabled = true;
-            
-            try {
-                // Enviar los datos al servidor para crear una preferencia de MercadoPago
-                const response = await fetch('/.netlify/functions/create-preference', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        title: packageName,
-                        price: amount,
-                        quantity: 1,
-                        email: formDataObj.email,
-                        description: "Canción personalizada - MelodíasDelCorazón"
-                    }),
-                });
+        // Reemplaza la parte de manejo del formulario en tu archivo index.html
+document.getElementById("songForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+    
+    // Obtener datos del formulario
+    const formData = new FormData(this);
+    const formDataObj = {};
+    formData.forEach((value, key) => {
+        formDataObj[key] = value;
+    });
+    
+    // Obtener el precio basado en el paquete seleccionado
+    const packageSelect = document.getElementById("package");
+    let packageName = "Canción Básica";
+    
+    if (packageSelect.value === "basic") {
+        packageName = "Canción Básica";
+    } else if (packageSelect.value === "premium") {
+        packageName = "Canción Premium";
+    } else if (packageSelect.value === "deluxe") {
+        packageName = "Canción Deluxe";
+    } else if (packageSelect.value === "mother-special") {
+        packageName = "Especial Día de la Madre";
+    }
+    
+    // Cambiar el botón para mostrar que se está procesando
+    document.getElementById("checkout-step1").textContent = "Procesando...";
+    document.getElementById("checkout-step1").disabled = true;
+    
+    try {
+        // Aquí usaríamos Netlify Forms para enviar el formulario
+        // No es necesario código adicional ya que el formulario tiene data-netlify="true"
+        
+        // Mostrar mensaje de confirmación y enlace de pago
+        const formContainer = document.querySelector(".contact-form");
+        formContainer.innerHTML = `
+            <div style="text-align: center; padding: 2rem;">
+                <div style="background-color: #e6f7f3; border-radius: 10px; padding: 2rem; margin-bottom: 2rem;">
+                    <h3 style="color: #27ae60; margin-bottom: 1rem;">¡Solicitud recibida!</h3>
+                    <p>Hemos recibido tu solicitud de canción personalizada. Para completar tu pedido, haz clic en el botón de abajo para realizar el pago.</p>
+                </div>
                 
-                if (!response.ok) {
-                    throw new Error('Error al crear la preferencia de pago');
-                }
+                <p style="margin-bottom: 1.5rem;">Has seleccionado: <strong>${packageName}</strong></p>
                 
-                const data = await response.json();
+                <a href="https://link.mercadopago.cl/melodiasdelcorazon" 
+                   target="_blank" 
+                   class="btn" 
+                   style="display: inline-block; padding: 1rem 2.5rem; font-size: 1.2rem; background-color: #ff6b6b;">
+                    Realizar pago ahora
+                </a>
                 
-                // Redirigir al usuario a la página de pago de MercadoPago
-                window.location.href = data.init_point;
-                
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Hubo un problema al procesar tu solicitud. Por favor, intenta nuevamente.');
-                
-                // Restaurar el botón
-                document.getElementById("checkout-step1").textContent = "Enviar solicitud";
-                document.getElementById("checkout-step1").disabled = false;
-            }
-        });
+                <p style="margin-top: 1.5rem; font-size: 0.9rem; color: #666;">
+                    Nota: Por favor, incluye tu nombre en la descripción del pago para poder asociarlo con tu solicitud.
+                </p>
+            </div>
+        `;
+        
+        // Desplazar la página para mostrar el mensaje
+        document.querySelector('.contact-form').scrollIntoView({ behavior: 'smooth' });
+        
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Hubo un problema al procesar tu solicitud. Por favor, intenta nuevamente.');
+        
+        // Restaurar el botón
+        document.getElementById("checkout-step1").textContent = "Enviar solicitud";
+        document.getElementById("checkout-step1").disabled = false;
+    }
+});
 // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
