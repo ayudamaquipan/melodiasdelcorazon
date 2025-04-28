@@ -1274,6 +1274,193 @@ footer {
                 gap: 0.5rem;
             }
         }
+        /* Estilos mejorados para dispositivos móviles */
+
+/* Ajustes generales para pantallas pequeñas */
+@media (max-width: 768px) {
+    /* Headers y textos */
+    h1 {
+        font-size: 2.2rem !important;
+    }
+    
+    h2 {
+        font-size: 1.8rem !important;
+    }
+    
+    h3 {
+        font-size: 1.5rem !important;
+    }
+    
+    .tagline {
+        font-size: 1.1rem !important;
+        padding: 0 1rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1.1rem !important;
+        padding: 0 1rem;
+    }
+    
+    /* Contenedores */
+    .container {
+        padding: 0 1rem !important;
+    }
+    
+    /* Menú de navegación */
+    nav {
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 0.8rem 0 !important;
+    }
+    
+    nav ul {
+        display: inline-flex !important;
+        flex-wrap: nowrap !important;
+        padding: 0 0.5rem;
+    }
+    
+    nav a {
+        padding: 0.5rem 1rem !important;
+        font-size: 0.9rem;
+    }
+    
+    /* Oferta especial */
+    .special-offer {
+        padding: 2rem 1rem !important;
+        margin: 1rem !important;
+    }
+    
+    .offer-badge {
+        width: 80px !important;
+        height: 80px !important;
+        font-size: 0.9rem !important;
+        right: -15px !important;
+        top: -15px !important;
+    }
+    
+    .discount-price {
+        font-size: 2.2rem !important;
+    }
+    
+    /* Cards y grids */
+    .examples-grid, .process-steps, .testimonials-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+    
+    .example-card, .process-step, .testimonial-card {
+        margin: 0 0.5rem !important;
+    }
+    
+    /* Formulario */
+    .contact-form {
+        padding: 1.5rem !important;
+    }
+    
+    .form-control {
+        padding: 0.7rem !important;
+    }
+    
+    .contact-container {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Botones */
+    .btn {
+        padding: 0.7rem 1.5rem !important;
+        font-size: 1rem !important;
+    }
+    
+    .btn-large {
+        padding: 0.8rem 2rem !important;
+    }
+}
+
+/* Ajustes específicos para pantallas muy pequeñas */
+@media (max-width: 480px) {
+    /* Modificaciones para el hero section */
+    .header-content {
+        padding: 0 1rem;
+    }
+    
+    .btn-cta {
+        font-size: 1.1rem !important;
+        padding: 0.8rem 1.8rem !important;
+    }
+    
+    /* Mejoras de legibilidad para countdown */
+    .countdown {
+        gap: 0.3rem !important;
+    }
+    
+    .countdown-item {
+        min-width: 55px !important;
+        padding: 0.5rem !important;
+    }
+    
+    .countdown-value {
+        font-size: 1.2rem !important;
+    }
+    
+    /* Testimonios */
+    .testimonial-author {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+    
+    .testimonial-text {
+        font-size: 1rem !important;
+    }
+    
+    /* Estadísticas */
+    .testimonial-stats {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 1.5rem !important;
+    }
+    
+    /* Footer */
+    .footer-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .footer-nav a {
+        margin: 0 !important;
+    }
+    
+    /* Mejora en el formulario */
+    .form-group label {
+        font-size: 0.9rem;
+    }
+    
+    /* Hero features */
+    .hero-features {
+        align-items: flex-start !important;
+    }
+}
+
+/* Fix de overflow horizontal común en móviles */
+body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* Mejora de usabilidad en inputs para móviles */
+input, select, textarea {
+    font-size: 16px !important; /* Previene zoom en iOS */
+}
+
+/* Mejora de espaciado en el acordeón */
+.accordion-toggle {
+    padding: 1.2rem !important;
+}
+
+.accordion-content p {
+    padding: 1.2rem !important;
+}
     </style>
 </head>
 <body>
