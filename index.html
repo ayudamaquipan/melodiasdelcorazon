@@ -2048,97 +2048,189 @@ input, select, textarea {
         const countdownInterval = setInterval(updateCountdown, 1000);
         updateCountdown();
 // Inicializar MercadoPago
-        const mp = new MercadoPago("APP_USR-1f803242-043c-4e0a-afd9-1e52a0e70b70");
-        
-        // Reemplaza la parte de manejo del formulario en tu archivo index.html
-document.getElementById("songForm").addEventListener("submit", async function(e) {
-    e.preventDefault();
-    
-    // Obtener datos del formulario
-    const formData = new FormData(this);
-    const formDataObj = {};
-    formData.forEach((value, key) => {
-        formDataObj[key] = value;
-    });
-    
-    // Obtener el precio basado en el paquete seleccionado
+const mp = new MercadoPago("APP_USR-1f803242-043c-4e0a-afd9-1e52a0e70b70");
+
+// Integración mejorada de Mercado Pago
+document.addEventListener("DOMContentLoaded", function() {
+    // Obtener elementos del formulario
+    const form = document.getElementById("songForm");
     const packageSelect = document.getElementById("package");
-    let packageName = "Canción Básica";
     
-    if (packageSelect.value === "basic") {
-        packageName = "Canción Básica";
-    } else if (packageSelect.value === "premium") {
-        packageName = "Canción Premium";
-    } else if (packageSelect.value === "deluxe") {
-        packageName = "Canción Deluxe";
-    } else if (packageSelect.value === "mother-special") {
-        packageName = "Especial Día de la Madre";
-    }
+    // Mapeo de paquetes a precios
+    const packagePrices = {
+        "basic": 99,
+        "premium": 149,
+        "deluxe": 249,
+        "mother-special": 84
+    };
     
-    // Cambiar el botón para mostrar que se está procesando
-    document.getElementById("checkout-step1").textContent = "Procesando...";
-    document.getElementById("checkout-step1").disabled = true;
+    // Mapeo de paquetes a nombres para mostrar
+    const packageNames = {
+        "basic": "Canción Básica",
+        "premium": "Canción Premium",
+        "deluxe": "Canción Deluxe",
+        "mother-special": "Especial Día de la Madre"
+    };
     
-    try {
-        // Enviar los datos al servidor para enviar notificación por correo
-        const emailResponse = await fetch('/.netlify/functions/send-email', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(formDataObj),
-});
-        
-        if (!emailResponse.ok) {
-            console.warn('Advertencia: El correo no pudo ser enviado');
-        }
-        
-        // Mostrar mensaje de confirmación y enlace de pago
-        const formContainer = document.querySelector(".contact-form");
-        formContainer.innerHTML = `
-            <div style="text-align: center; padding: 2rem;">
-                <div style="background-color: #e6f7f3; border-radius: 10px; padding: 2rem; margin-bottom: 2rem;">
-                    <h3 style="color: #27ae60; margin-bottom: 1rem;">¡Solicitud recibida!</h3>
-                    <p>Hemos recibido tu solicitud de canción personalizada. Para completar tu pedido, haz clic en el botón de abajo para realizar el pago.</p>
-                </div>
-                
-                <p style="margin-bottom: 1.5rem;">Has seleccionado: <strong>${packageName}</strong></p>
-                
-                <a href="https://link.mercadopago.cl/melodiasdelcorazon" 
-                   target="_blank" 
-                   class="btn" 
-                   style="display: inline-block; padding: 1rem 2.5rem; font-size: 1.2rem; background-color: #ff6b6b;">
-                    Realizar pago ahora
-                </a>
-                
-                <p style="margin-top: 1.5rem; font-size: 0.9rem; color: #666;">
-                    Nota: Por favor, incluye tu nombre <strong>(${formDataObj.name})</strong> en la descripción del pago para poder asociarlo con tu solicitud.
-                </p>
-            </div>
-        `;
-        
-        // Desplazar la página para mostrar el mensaje
-        document.querySelector('.contact-form').scrollIntoView({ behavior: 'smooth' });
-        
-    } catch (error) {
-        console.error('Error:', error);
-        alert('Hubo un problema al procesar tu solicitud. Por favor, intenta nuevamente.');
-        
-        // Restaurar el botón
-        document.getElementById("checkout-step1").textContent = "Enviar solicitud";
-        document.getElementById("checkout-step1").disabled = false;
-    }
-});
-// Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+    if (form) {
+        form.addEventListener("submit", async function(e) {
+            e.preventDefault();
+            
+            // Cambiar el botón para mostrar que se está procesando
+            const submitButton = document.getElementById("checkout-step1");
+            submitButton.textContent = "Procesando...";
+            submitButton.disabled = true;
+            
+            // Obtener datos del formulario
+            const formData = new FormData(this);
+            const formDataObj = {};
+            formData.forEach((value, key) => {
+                formDataObj[key] = value;
             });
+            
+            try {
+                // 1. Enviar los datos al servidor para notificación por correo
+                const emailResponse = await fetch('/.netlify/functions/send-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formDataObj),
+                });
+                
+                if (!emailResponse.ok) {
+                    console.warn('Advertencia: El correo no pudo ser enviado');
+                }
+                
+                // 2. Obtener el precio según el paquete seleccionado
+                const selectedPackage = packageSelect.value;
+                const price = packagePrices[selectedPackage] || 99; // Valor predeterminado si no se encuentra
+                const packageName = packageNames[selectedPackage] || "Canción Personalizada";
+                
+                // 3. Crear preferencia de pago en Mercado Pago mediante nuestra función
+                const preferenceResponse = await fetch('/.netlify/functions/create-preference', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        title: packageName,
+                        price: price,
+                        quantity: 1,
+                        email: formDataObj.email,
+                        description: `Pedido de ${formDataObj.name} - ${packageName}`
+                    }),
+                });
+                
+                if (!preferenceResponse.ok) {
+                    throw new Error('No se pudo crear la preferencia de pago');
+                }
+                
+                const preferenceData = await preferenceResponse.json();
+                
+                // 4. Almacenar información del pedido en localStorage para recuperarla después
+                localStorage.setItem('melodias_pedido', JSON.stringify({
+                    nombre: formDataObj.name,
+                    email: formDataObj.email,
+                    paquete: packageName,
+                    precio: price,
+                    fecha: new Date().toISOString()
+                }));
+                
+                // 5. Crear mensaje de confirmación antes de redirigir
+                const formContainer = document.querySelector(".contact-form");
+                formContainer.innerHTML = `
+                    <div style="text-align: center; padding: 2rem;">
+                        <div style="background-color: #e6f7f3; border-radius: 10px; padding: 2rem; margin-bottom: 2rem;">
+                            <h3 style="color: #27ae60; margin-bottom: 1rem;">¡Solicitud recibida!</h3>
+                            <p>Hemos recibido tu solicitud. Te estamos redirigiendo a la página de pago...</p>
+                        </div>
+                        
+                        <p style="margin-bottom: 1.5rem;">Has seleccionado: <strong>${packageName}</strong> - <strong>€${price}</strong></p>
+                        
+                        <div class="loader" style="margin: 20px auto; border: 5px solid #f3f3f3; border-top: 5px solid #ff6b6b; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite;"></div>
+                        <style>@keyframes spin {0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); }}</style>
+                        
+                        <p style="margin-top: 1.5rem; font-size: 0.9rem;">
+                            Si no eres redirigido automáticamente, <a href="${preferenceData.init_point}" id="manual-redirect" style="color: #ff6b6b; font-weight: bold;">haz clic aquí</a>.
+                        </p>
+                    </div>
+                `;
+                
+                // 6. Redirigir al usuario a la página de pago de Mercado Pago
+                setTimeout(() => {
+                    window.location.href = preferenceData.init_point;
+                }, 2000); // Esperar 2 segundos para que el usuario vea el mensaje
+                
+            } catch (error) {
+                console.error('Error:', error);
+                
+                // Mostrar mensaje de error
+                const formContainer = document.querySelector(".contact-form");
+                formContainer.innerHTML = `
+                    <div style="text-align: center; padding: 2rem;">
+                        <div style="background-color: #ffecec; border-radius: 10px; padding: 2rem; margin-bottom: 2rem;">
+                            <h3 style="color: #e74c3c; margin-bottom: 1rem;">Ha ocurrido un error</h3>
+                            <p>Lo sentimos, no pudimos procesar tu solicitud. Por favor, intenta nuevamente o contáctanos directamente.</p>
+                        </div>
+                        
+                        <button class="btn" id="retry-button" style="margin-top: 1rem;">Intentar de nuevo</button>
+                    </div>
+                `;
+                
+                // Añadir evento al botón de reintentar
+                document.getElementById("retry-button").addEventListener("click", function() {
+                    window.location.reload();
+                });
+            }
         });
+        
+        // Actualizar el precio mostrado cuando cambia el paquete seleccionado
+        if (packageSelect) {
+            packageSelect.addEventListener("change", function() {
+                const selectedPackage = this.value;
+                const priceDisplay = document.getElementById("selected-price");
+                
+                if (priceDisplay) {
+                    const price = packagePrices[selectedPackage] || "N/A";
+                    priceDisplay.textContent = `€${price}`;
+                }
+            });
+        }
+    }
+    
+    // Para la página de éxito: recuperar datos del pedido
+    if (window.location.pathname.includes('/success')) {
+        try {
+            const pedidoData = JSON.parse(localStorage.getItem('melodias_pedido') || '{}');
+            
+            // Mostrar la información en la página de éxito si está disponible
+            if (pedidoData.nombre) {
+                const nombreElement = document.getElementById('cliente-nombre');
+                if (nombreElement) nombreElement.textContent = pedidoData.nombre;
+                
+                const paqueteElement = document.getElementById('paquete-nombre');
+                if (paqueteElement) paqueteElement.textContent = pedidoData.paquete;
+                
+                const precioElement = document.getElementById('paquete-precio');
+                if (precioElement) precioElement.textContent = `€${pedidoData.precio}`;
+            }
+        } catch (error) {
+            console.error('Error al recuperar datos del pedido:', error);
+        }
+    }
+});
+
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
         
         // Set minimum date for deadline input (today + 7 days)
         const deadlineInput = document.getElementById('deadline');
