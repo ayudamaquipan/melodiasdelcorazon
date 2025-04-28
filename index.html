@@ -1903,71 +1903,84 @@ input, select, textarea {
                     </div>
                 </div>
 <div class="contact-form">
-                    <form id="songForm" data-netlify="true" name="song-request">
-                        <input type="hidden" name="form-name" value="song-request">
-                        <div class="form-group">
-                            <label for="name">Nombre completo</label>
-                            <input type="text" id="name" name="name" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Correo electrónico</label>
-                            <input type="email" id="email" name="email" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Teléfono</label>
-                            <input type="tel" id="phone" name="phone" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="occasion">Ocasión</label>
-                            <select id="occasion" name="occasion" class="form-control" required>
-                                <option value="">Selecciona una ocasión</option>
-                                <option value="mother">Día de la Madre</option>
-                                <option value="birthday">Cumpleaños</option>
-                                <option value="anniversary">Aniversario</option>
-                                <option value="wedding">Boda</option>
-                                <option value="valentine">San Valentín</option>
-                                <option value="other">Otra ocasión</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="style">Estilo musical preferido</label>
-                            <select id="style" name="style" class="form-control" required>
-                                <option value="">Selecciona un estilo</option>
-                                <option value="ballad">Balada</option>
-                                <option value="pop">Pop</option>
-                                <option value="rock">Rock suave</option>
-                                <option value="folk">Folk/Acústico</option>
-                                <option value="latinpop">Pop Latino</option>
-                                <option value="rnb">R&B</option>
-                                <option value="other">Otro estilo</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Cuéntanos tu historia (detalles para la letra)</label>
-                            <textarea id="description" name="description" class="form-control" rows="5" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="package">Selecciona tu paquete</label>
-                            <select id="package" name="package" class="form-control" required>
-                                <option value="">Selecciona un paquete</option>
-                                <option value="basic">Canción Básica - €99</option>
-                                <option value="premium">Canción Premium - €149</option>
-                                <option value="deluxe">Canción Deluxe - €249</option>
-                                <option value="mother-special">Especial Día de la Madre - €84</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="deadline">¿Cuándo necesitas la canción?</label>
-                            <input type="date" id="deadline" name="deadline" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="additional">Información adicional</label>
-                            <textarea id="additional" name="additional" class="form-control" rows="3"></textarea>
-                        </div>
-                        <!-- Paso inicial del formulario -->
-                        <button type="submit" class="btn" id="checkout-step1">Enviar solicitud</button>
-                    </form>
-                </div>
+    <form id="songForm" data-netlify="true" name="song-request">
+        <input type="hidden" name="form-name" value="song-request">
+        <div class="form-group">
+            <label for="name">Nombre completo</label>
+            <input type="text" id="name" name="name" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Teléfono</label>
+            <input type="tel" id="phone" name="phone" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="occasion">Ocasión</label>
+            <select id="occasion" name="occasion" class="form-control" required>
+                <option value="">Selecciona una ocasión</option>
+                <option value="mother">Día de la Madre</option>
+                <option value="birthday">Cumpleaños</option>
+                <option value="anniversary">Aniversario</option>
+                <option value="wedding">Boda</option>
+                <option value="valentine">San Valentín</option>
+                <option value="other">Otra ocasión</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="style">Estilo musical preferido</label>
+            <select id="style" name="style" class="form-control" required>
+                <option value="">Selecciona un estilo</option>
+                <option value="ballad">Balada</option>
+                <option value="pop">Pop</option>
+                <option value="rock">Rock suave</option>
+                <option value="folk">Folk/Acústico</option>
+                <option value="latinpop">Pop Latino</option>
+                <option value="rnb">R&B</option>
+                <option value="other">Otro estilo</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="description">Cuéntanos tu historia (detalles para la letra)</label>
+            <textarea id="description" name="description" class="form-control" rows="5" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="package">Selecciona tu paquete</label>
+            <select id="package" name="package" class="form-control" required>
+                <option value="">Selecciona un paquete</option>
+                <option value="basic">Canción Básica - €99</option>
+                <option value="premium">Canción Premium - €149</option>
+                <option value="deluxe">Canción Deluxe - €249</option>
+                <option value="mother-special">Especial Día de la Madre - €84</option>
+            </select>
+            <div class="package-price" style="margin-top: 10px; font-weight: bold; color: #ff6b6b; text-align: right;">
+                Precio: <span id="selected-price">--</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="deadline">¿Cuándo necesitas la canción?</label>
+            <input type="date" id="deadline" name="deadline" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="additional">Información adicional</label>
+            <textarea id="additional" name="additional" class="form-control" rows="3"></textarea>
+        </div>
+        
+        <!-- Botón de pago directo -->
+        <button type="submit" class="btn" id="checkout-step1" style="width: 100%; padding: 1rem; font-size: 1.2rem; margin-top: 1rem;">
+            Enviar solicitud y pagar
+        </button>
+        
+        <div class="payment-info" style="margin-top: 1rem; text-align: center; font-size: 0.9rem; color: #666;">
+            <p>Al hacer clic en "Enviar solicitud y pagar" serás redirigido a MercadoPago para completar tu pago de forma segura.</p>
+            <div style="margin-top: 0.5rem;">
+                Pago seguro con MercadoPago
+            </div>
+        </div>
+    </form>
+</div>
             </div>
         </div>
     </section>
