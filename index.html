@@ -1895,12 +1895,12 @@ document.getElementById("songForm").addEventListener("submit", async function(e)
     try {
         // Enviar los datos al servidor para enviar notificación por correo
         const emailResponse = await fetch('/.netlify/functions/send-email', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formDataObj),
-        });
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formDataObj),
+});
         
         if (!emailResponse.ok) {
             console.warn('Advertencia: El correo no pudo ser enviado');
