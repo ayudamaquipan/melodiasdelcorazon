@@ -1461,6 +1461,71 @@ input, select, textarea {
 .accordion-content p {
     padding: 1.2rem !important;
 }
+        /* Mejoras para el contenedor de video */
+.video-container {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    background-color: #000; /* Fondo negro para video */
+    aspect-ratio: 16 / 9; /* Mantener proporción estándar de video */
+}
+
+/* Imagen de miniatura */
+.hero-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* Botón de reproducción con efecto hover */
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 70px;
+    background-color: var(--color-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.play-button span {
+    color: white;
+    font-size: 2rem;
+    margin-left: 5px; /* Centrar visualmente el ícono de play */
+}
+
+.play-button:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    background-color: #ff5252;
+}
+
+/* Elemento de video */
+.hero-video-element {
+    border-radius: 10px;
+}
+
+/* Personalización de los controles de video para móviles */
+@media (max-width: 768px) {
+    .play-button {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .play-button span {
+        font-size: 1.7rem;
+    }
+}
     </style>
 </head>
 <body>
@@ -1507,15 +1572,24 @@ input, select, textarea {
                     </div>
                     <a href="#offer" class="btn btn-accent">Ver Oferta Especial</a>
                 </div>
-                <div class="hero-video">
-                    <div class="video-container">
-                        <img src="video/muestra.mp4" alt="" class="hero-image">
-                        <div class="play-button">
-                            <span>▶</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="hero-video">
+    <div class="video-container">
+        <!-- Imagen de miniatura (se muestra antes de reproducir el video) -->
+        <img src="img/video-thumbnail.jpg" alt="Video promocional" class="hero-image">
+        
+        <!-- Elemento de video (inicialmente oculto) -->
+        <video class="hero-video-element" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 10px;" controls playsinline>
+            <source src="video/muestra.mp4" type="video/mp4">
+            <source src="video/muestra.webm" type="video/webm">
+            Tu navegador no soporta la reproducción de videos.
+        </video>
+        
+        <!-- Botón de reproducción personalizado -->
+        <div class="play-button">
+            <span>▶</span>
+        </div>
+    </div>
+</div>
             <div class="social-proof">
                 <p>Más de <strong>5,000</strong> clientes satisfechos</p>
                 <div class="trust-badges">
@@ -2294,6 +2368,90 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 // Y luego redirigir a MercadoPago
             });
         }
+        // Control de reproducción del video principal
+document.addEventListener('DOMContentLoaded', function() {
+    // Obtener los elementos necesarios
+    const videoContainer = document.querySelector('.video-container');
+    const playButton = document.querySelector('.play-button');
+    const heroImage = document.querySelector('.hero-image');
+    const videoElement = document.querySelector('.hero-video-element');
+    
+    if (playButton && videoElement) {
+        // Función para iniciar reproducción
+        function playVideo() {
+            // Ocultar la imagen de miniatura
+            if (heroImage) heroImage.style.display = 'none';
+            
+            // Mostrar el video
+            videoElement.style.display = 'block';
+            
+            // Reproducir video
+            videoElement.play()
+                .then(() => {
+                    // Ocultar botón de reproducción
+                    playButton.style.display = 'none';
+                })
+                .catch(error => {
+                    console.error('Error al reproducir el video:', error);
+                    // Mostrar mensaje amigable en caso de error
+                    const errorMsg = document.createElement('div');
+                    errorMsg.className = 'video-error-message';
+                    errorMsg.innerHTML = '<p>No se pudo reproducir el video. <button class="btn-retry">Reintentar</button></p>';
+                    errorMsg.style.position = 'absolute';
+                    errorMsg.style.top = '50%';
+                    errorMsg.style.left = '50%';
+                    errorMsg.style.transform = 'translate(-50%, -50%)';
+                    errorMsg.style.backgroundColor = 'rgba(0,0,0,0.7)';
+                    errorMsg.style.color = 'white';
+                    errorMsg.style.padding = '15px 20px';
+                    errorMsg.style.borderRadius = '5px';
+                    errorMsg.style.textAlign = 'center';
+                    
+                    // Limpiar cualquier mensaje previo
+                    const prevError = videoContainer.querySelector('.video-error-message');
+                    if (prevError) prevError.remove();
+                    
+                    // Añadir mensaje de error
+                    videoContainer.appendChild(errorMsg);
+                    
+                    // Evento para reintentar
+                    const retryBtn = errorMsg.querySelector('.btn-retry');
+                    if (retryBtn) {
+                        retryBtn.addEventListener('click', function() {
+                            errorMsg.remove();
+                            playVideo();
+                        });
+                    }
+                    
+                    // Mantener visibles la miniatura y el botón
+                    heroImage.style.display = 'block';
+                    playButton.style.display = 'flex';
+                });
+        }
+        
+        // Añadir evento al botón de reproducción
+        playButton.addEventListener('click', playVideo);
+        
+        // Cuando termina el video
+        videoElement.addEventListener('ended', function() {
+            // Restaurar el estado inicial
+            heroImage.style.display = 'block';
+            playButton.style.display = 'flex';
+            videoElement.style.display = 'none';
+            
+            // Rebobinar para siguiente reproducción
+            videoElement.currentTime = 0;
+        });
+        
+        // En caso de pausa
+        videoElement.addEventListener('pause', function() {
+            // Mostrar nuevamente el botón si se pausa manualmente
+            if (!videoElement.ended) {
+                playButton.style.display = 'flex';
+            }
+        });
+    }
+});
     </script>
 </body>
 </html>
