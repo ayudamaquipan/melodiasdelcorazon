@@ -1375,7 +1375,6 @@ footer {
         padding: 0.8rem 2rem !important;
     }
 }
-
 /* Ajustes específicos para pantallas muy pequeñas */
 @media (max-width: 480px) {
     /* Modificaciones para el hero section */
@@ -1608,7 +1607,7 @@ input, select, textarea {
         align-items: center;
     }
 }
-                    /* Estilos para mejorar la interacción de las tarjetas de ejemplo */
+/* Estilos para mejorar la interacción de las tarjetas de ejemplo */
             .example-image-container {
                 position: relative;
                 overflow: hidden;
@@ -1635,6 +1634,7 @@ input, select, textarea {
                 opacity: 0;
                 transition: opacity 0.3s ease;
                 cursor: pointer;
+                z-index: 2;
             }
 
             .example-card:hover .play-overlay {
@@ -1675,6 +1675,7 @@ input, select, textarea {
                 background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
                 animation: audio-wave 1.5s infinite;
                 border-radius: 3px;
+                z-index: 5;
             }
 
             @keyframes audio-wave {
@@ -1850,8 +1851,8 @@ input, select, textarea {
                             </div>
                         </div>
                         <audio class="audio-player" preload="metadata">
-                            <source src="audio/canción-amor.mp3" type="audio/mpeg">
-                            <source src="audio/canción-amor.ogg" type="audio/ogg">
+                            <source src="audio/cancion-amor.mp3" type="audio/mpeg">
+                            <source src="audio/cancion-amor.ogg" type="audio/ogg">
                             Tu navegador no soporta el elemento de audio.
                         </audio>
                         <a href="#contact" class="btn btn-secondary btn-sm">Quiero algo similar</a>
@@ -1956,6 +1957,7 @@ input, select, textarea {
             </div>
         </div>
     </section>
+
 <section id="testimonials" class="testimonials">
         <div class="container">
             <h2 class="section-title">Lo Que Dicen Nuestros Clientes</h2>
@@ -1979,7 +1981,8 @@ input, select, textarea {
                         </div>
                     </div>
                 </div>
-<div class="testimonials-grid">
+
+                <div class="testimonials-grid">
                     <div class="testimonial-card">
                         <div class="testimonial-content">
                             <div class="testimonial-quote">"</div>
@@ -2032,7 +2035,8 @@ input, select, textarea {
                     </div>
                 </div>
             </div>
-<div class="testimonial-stats">
+
+            <div class="testimonial-stats">
                 <div class="stat-item">
                     <span class="stat-value">5,000+</span>
                     <span class="stat-label">Clientes satisfechos</span>
@@ -2087,7 +2091,8 @@ input, select, textarea {
                         <p>¡Por supuesto! Cada paquete incluye un número específico de revisiones: una revisión para el paquete Básico, tres para el Premium y cinco para el Deluxe. Durante estas revisiones, puedes solicitar cambios en la letra, melodía o arreglos musicales para asegurar que la canción sea exactamente como la imaginas.</p>
                     </div>
                 </div>
-<div class="accordion-item">
+
+                <div class="accordion-item">
                     <button class="accordion-toggle">
                         <span>¿Qué información necesitan para crear mi canción?</span>
                         <span class="accordion-icon">+</span>
@@ -2119,6 +2124,7 @@ input, select, textarea {
             </div>
         </div>
     </section>
+
 <section id="contact" class="contact">
         <div class="container">
             <h2 class="section-title">Crea Tu Canción Personalizada</h2>
@@ -2139,6 +2145,7 @@ input, select, textarea {
                         <span>info@melodiasdelcorazon.com</span>
                     </div>
                 </div>
+
 <div class="contact-form">
     <form id="songForm" data-netlify="true" name="song-request">
         <input type="hidden" name="form-name" value="song-request">
@@ -2193,7 +2200,7 @@ input, select, textarea {
                 <option value="mother-special">Especial Día de la Madre - €84</option>
             </select>
             <div class="package-price" style="margin-top: 10px; font-weight: bold; color: #ff6b6b; text-align: right;">
-                Precio: <span id="selected-price">--</span>
+Precio: <span id="selected-price">--</span>
             </div>
         </div>
         <div class="form-group">
@@ -2470,7 +2477,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 });
-
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -2482,137 +2488,22 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
         
-        // Set minimum date for deadline input (today + 7 days)
-        const deadlineInput = document.getElementById('deadline');
-        if (deadlineInput) {
-            const today = new Date();
-            const minDate = new Date(today);
-            minDate.setDate(today.getDate() + 7);
-            
-            const yyyy = minDate.getFullYear();
-            const mm = String(minDate.getMonth() + 1).padStart(2, '0');
-            const dd = String(minDate.getDate()).padStart(2, '0');
-            
-            deadlineInput.min = `${yyyy}-${mm}-${dd}`;
-        }
-        
-        // Animación de aparición al hacer scroll
-        function revealOnScroll() {
-            const elements = document.querySelectorAll('.feature-card, .example-card, .process-step, .testimonial-card, .pricing-card');
-            const windowHeight = window.innerHeight;
-            
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) {
-                    element.classList.add('revealed');
-                }
-            });
-        }
-        
-        window.addEventListener('scroll', revealOnScroll);
-        window.addEventListener('load', revealOnScroll);
-        
-        // Simulación de reproducción de audio
-        document.querySelectorAll('.play-overlay, .play-button').forEach(button => {
-            button.addEventListener('click', function() {
-                alert('Reproduciendo ejemplo de canción...');
-                // Aquí se podría implementar la lógica real de reproducción
-            });
-        });
-        
-        // Netlify Forms handler
-        const form = document.querySelector('#songForm');
-        if (form) {
-            form.addEventListener('submit', (e) => {
-                // Podemos permitir que Netlify maneje el envío del formulario
-                // Y luego redirigir a MercadoPago
-            });
-        }
-        // Control de reproducción del video principal
-document.addEventListener('DOMContentLoaded', function() {
-    // Obtener los elementos necesarios
-    const videoContainer = document.querySelector('.video-container');
-    const playButton = document.querySelector('.play-button');
-    const heroImage = document.querySelector('.hero-image');
-    const videoElement = document.querySelector('.hero-video-element');
+// Set minimum date for deadline input (today + 7 days)
+const deadlineInput = document.getElementById('deadline');
+if (deadlineInput) {
+    const today = new Date();
+    const minDate = new Date(today);
+    minDate.setDate(today.getDate() + 7);
     
-    if (playButton && videoElement) {
-        // Función para iniciar reproducción
-        function playVideo() {
-            // Ocultar la imagen de miniatura
-            if (heroImage) heroImage.style.display = 'none';
-            
-            // Mostrar el video
-            videoElement.style.display = 'block';
-            
-            // Reproducir video
-            videoElement.play()
-                .then(() => {
-                    // Ocultar botón de reproducción
-                    playButton.style.display = 'none';
-                })
-                .catch(error => {
-                    console.error('Error al reproducir el video:', error);
-                    // Mostrar mensaje amigable en caso de error
-                    const errorMsg = document.createElement('div');
-                    errorMsg.className = 'video-error-message';
-                    errorMsg.innerHTML = '<p>No se pudo reproducir el video. <button class="btn-retry">Reintentar</button></p>';
-                    errorMsg.style.position = 'absolute';
-                    errorMsg.style.top = '50%';
-                    errorMsg.style.left = '50%';
-                    errorMsg.style.transform = 'translate(-50%, -50%)';
-                    errorMsg.style.backgroundColor = 'rgba(0,0,0,0.7)';
-                    errorMsg.style.color = 'white';
-                    errorMsg.style.padding = '15px 20px';
-                    errorMsg.style.borderRadius = '5px';
-                    errorMsg.style.textAlign = 'center';
-                    
-                    // Limpiar cualquier mensaje previo
-                    const prevError = videoContainer.querySelector('.video-error-message');
-                    if (prevError) prevError.remove();
-                    
-                    // Añadir mensaje de error
-                    videoContainer.appendChild(errorMsg);
-                    
-                    // Evento para reintentar
-                    const retryBtn = errorMsg.querySelector('.btn-retry');
-                    if (retryBtn) {
-                        retryBtn.addEventListener('click', function() {
-                            errorMsg.remove();
-                            playVideo();
-                        });
-                    }
-                    
-                    // Mantener visibles la miniatura y el botón
-                    heroImage.style.display = 'block';
-                    playButton.style.display = 'flex';
-                });
-        }
-        
-        // Añadir evento al botón de reproducción
-        playButton.addEventListener('click', playVideo);
-        
-        // Cuando termina el video
-        videoElement.addEventListener('ended', function() {
-            // Restaurar el estado inicial
-            heroImage.style.display = 'block';
-            playButton.style.display = 'flex';
-            videoElement.style.display = 'none';
-            
-            // Rebobinar para siguiente reproducción
-            videoElement.currentTime = 0;
-        });
-        
-        // En caso de pausa
-        videoElement.addEventListener('pause', function() {
-            // Mostrar nuevamente el botón si se pausa manualmente
-            if (!videoElement.ended) {
-                playButton.style.display = 'flex';
-            }
-        });
-    }
-});
-        document.addEventListener('DOMContentLoaded', function() {
+    const yyyy = minDate.getFullYear();
+    const mm = String(minDate.getMonth() + 1).padStart(2, '0');
+    const dd = String(minDate.getDate()).padStart(2, '0');
+    
+    deadlineInput.min = `${yyyy}-${mm}-${dd}`;
+}
+
+// Control de reproducción del video principal
+document.addEventListener('DOMContentLoaded', function() {
     // Elementos del video
     const videoElement = document.getElementById('hero-video-player');
     const soundToggle = document.querySelector('.sound-toggle');
@@ -2648,75 +2539,170 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-        document.addEventListener('DOMContentLoaded', function() {
-                // Obtener todas las tarjetas de ejemplo
-                const exampleCards = document.querySelectorAll('.example-card');
+
+// Script optimizado para reproducción de audio en ejemplos
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Inicializando reproductor de audio para ejemplos...');
+    
+    // Obtener todas las tarjetas de ejemplo
+    const exampleCards = document.querySelectorAll('.example-card');
+    console.log('Tarjetas de ejemplo encontradas:', exampleCards.length);
+    
+    // Para cada tarjeta, configurar la funcionalidad de reproducción
+    exampleCards.forEach((card, index) => {
+        const imageContainer = card.querySelector('.example-image-container');
+        const playOverlay = card.querySelector('.play-overlay');
+        const playIcon = card.querySelector('.play-icon');
+        const audioPlayer = card.querySelector('.audio-player');
+        
+        console.log(`Configurando tarjeta ${index + 1}:`, {
+            tieneImagen: !!imageContainer,
+            tieneOverlay: !!playOverlay,
+            tieneIcono: !!playIcon,
+            tieneAudio: !!audioPlayer
+        });
+        
+        // Verificar que existan todos los elementos necesarios
+        if (imageContainer && audioPlayer && playOverlay) {
+            // Función para alternar la reproducción
+            function togglePlayback(event) {
+                // Prevenir comportamiento por defecto
+                if (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
                 
-                // Para cada tarjeta, configurar la funcionalidad de reproducción
-                exampleCards.forEach(card => {
-                    const imageContainer = card.querySelector('.example-image-container');
-                    const playOverlay = card.querySelector('.play-overlay');
-                    const playIcon = card.querySelector('.play-icon');
-                    const audioPlayer = card.querySelector('.audio-player');
-                    
-                    // Verificar que existan todos los elementos necesarios
-                    if (imageContainer && audioPlayer && playOverlay) {
-                        // Función para alternar la reproducción
-                        function togglePlayback() {
-                            // Si el audio está pausado, reproducirlo
-                            if (audioPlayer.paused) {
-                                // Pausar todos los demás audios primero
-                                document.querySelectorAll('.audio-player').forEach(player => {
-                                    if (player !== audioPlayer && !player.paused) {
-                                        player.pause();
-                                        
-                                        // Actualizar el ícono en la tarjeta correspondiente
-                                        const otherCard = player.closest('.example-card');
-                                        const otherIcon = otherCard.querySelector('.play-icon');
-                                        const otherOverlay = otherCard.querySelector('.play-overlay');
-                                        
-                                        if (otherIcon) otherIcon.innerHTML = '▶';
-                                        if (otherOverlay) otherOverlay.style.opacity = '0';
-                                        otherCard.classList.remove('playing');
-                                    }
-                                });
+                console.log(`Intentando reproducir audio ${index + 1}`);
+                
+                // Si el audio está pausado, reproducirlo
+                if (audioPlayer.paused) {
+                    console.log(`Audio ${index + 1} estaba pausado. Reproduciendo...`);
+                    // Pausar todos los demás audios primero
+                    document.querySelectorAll('.audio-player').forEach(player => {
+                        if (player !== audioPlayer && !player.paused) {
+                            console.log('Pausando otro audio');
+                            player.pause();
+                            
+                            // Actualizar el ícono en la tarjeta correspondiente
+                            const otherCard = player.closest('.example-card');
+                            if (otherCard) {
+                                const otherIcon = otherCard.querySelector('.play-icon');
+                                const otherOverlay = otherCard.querySelector('.play-overlay');
                                 
-                                // Reproducir este audio
-                                audioPlayer.play()
-                                    .then(() => {
-                                        // Cambiar el ícono a pausa
-                                        if (playIcon) playIcon.innerHTML = '❚❚';
-                                        // Mantener visible el overlay
-                                        playOverlay.style.opacity = '1';
-                                        // Activar efecto visual
-                                        card.classList.add('playing');
-                                    })
-                                    .catch(error => {
-                                        console.error('Error al reproducir audio:', error);
-                                        alert('No se pudo reproducir el audio. Inténtalo de nuevo más tarde.');
-                                    });
-                            } else {
-                                // Si está reproduciéndose, pausarlo
-                                audioPlayer.pause();
-                                if (playIcon) playIcon.innerHTML = '▶';
-                                playOverlay.style.opacity = '0';
-                                card.classList.remove('playing');
+                                if (otherIcon) otherIcon.innerHTML = '▶';
+                                if (otherOverlay) otherOverlay.style.opacity = '0';
+                                otherCard.classList.remove('playing');
                             }
                         }
+                    });
+                    
+                    // Reproducir este audio
+                    try {
+                        const playPromise = audioPlayer.play();
                         
-                        // Hacer clic en la imagen o en el overlay de reproducción
-                        imageContainer.addEventListener('click', togglePlayback);
-                        playOverlay.addEventListener('click', togglePlayback);
-                        
-                        // Cuando el audio termine, restablecer la interfaz
-                        audioPlayer.addEventListener('ended', function() {
-                            if (playIcon) playIcon.innerHTML = '▶';
-                            playOverlay.style.opacity = '0';
-                            card.classList.remove('playing');
-                        });
+                        if (playPromise !== undefined) {
+                            playPromise
+                                .then(() => {
+                                    console.log(`Audio ${index + 1} reproduciendo correctamente`);
+                                    // Cambiar el ícono a pausa
+                                    if (playIcon) playIcon.innerHTML = '❚❚';
+                                    // Mantener visible el overlay
+                                    playOverlay.style.opacity = '1';
+                                    // Activar efecto visual
+                                    card.classList.add('playing');
+                                })
+                                .catch(error => {
+                                    console.error(`Error al reproducir audio ${index + 1}:`, error);
+                                    
+                                    // Verificar si es un problema común
+                                    if (error.name === 'NotSupportedError') {
+                                        alert('El formato de audio no es compatible con tu navegador');
+                                    } else if (error.name === 'NotAllowedError') {
+                                        alert('Tu navegador no permite la reproducción automática. Por favor, intenta hacer clic de nuevo.');
+                                    } else {
+                                        alert(`No se pudo reproducir el audio. Error: ${error.message}`);
+                                    }
+                                });
+                        }
+                    } catch (error) {
+                        console.error(`Error al intentar reproducir audio ${index + 1}:`, error);
+                        alert('Ocurrió un error al intentar reproducir el audio.');
                     }
-                });
+                } else {
+                    console.log(`Audio ${index + 1} ya estaba reproduciendo. Pausando...`);
+                    // Si está reproduciéndose, pausarlo
+                    audioPlayer.pause();
+                    if (playIcon) playIcon.innerHTML = '▶';
+                    playOverlay.style.opacity = '0';
+                    card.classList.remove('playing');
+                }
+            }
+            
+            // Eliminar eventos previos para evitar duplicados
+            const newImageContainer = imageContainer.cloneNode(true);
+            const newPlayOverlay = playOverlay.cloneNode(true);
+            
+            if (imageContainer.parentNode) {
+                imageContainer.parentNode.replaceChild(newImageContainer, imageContainer);
+            }
+            
+            if (playOverlay.parentNode) {
+                playOverlay.parentNode.replaceChild(newPlayOverlay, playOverlay);
+            }
+            
+            // Obtener referencias actualizadas
+            const updatedImageContainer = card.querySelector('.example-image-container');
+            const updatedPlayOverlay = card.querySelector('.play-overlay');
+            
+            // Añadir nuevos event listeners
+            if (updatedImageContainer) {
+                updatedImageContainer.addEventListener('click', togglePlayback);
+                console.log(`Event listener añadido a imageContainer para tarjeta ${index + 1}`);
+            }
+            
+            if (updatedPlayOverlay) {
+                updatedPlayOverlay.addEventListener('click', togglePlayback);
+                console.log(`Event listener añadido a playOverlay para tarjeta ${index + 1}`);
+            }
+            
+            // Cuando el audio termine, restablecer la interfaz
+            audioPlayer.addEventListener('ended', function() {
+                console.log(`Audio ${index + 1} terminado`);
+                const currentIcon = card.querySelector('.play-icon');
+                const currentOverlay = card.querySelector('.play-overlay');
+                if (currentIcon) currentIcon.innerHTML = '▶';
+                if (currentOverlay) currentOverlay.style.opacity = '0';
+                card.classList.remove('playing');
             });
+            
+            // Detectar cuando el audio esté listo para reproducir
+            audioPlayer.addEventListener('canplaythrough', function() {
+                console.log(`Audio ${index + 1} cargado y listo para reproducir`);
+            });
+            
+            // Capturar errores específicos del audio
+            audioPlayer.addEventListener('error', function(e) {
+                console.error(`Error en audio ${index + 1}:`, this.error);
+                
+                let errorMsg = 'Error desconocido';
+                if (this.error) {
+                    switch(this.error.code) {
+                        case 1: errorMsg = 'Proceso abortado'; break;
+                        case 2: errorMsg = 'Error de red'; break;
+                        case 3: errorMsg = 'Error al decodificar'; break;
+                        case 4: errorMsg = 'Formato no soportado'; break;
+                    }
+                }
+                
+                alert(`Error al cargar el audio: ${errorMsg}`);
+            });
+        } else {
+            console.warn(`Tarjeta ${index + 1}: Faltan elementos necesarios para la reproducción`);
+        }
+    });
+    
+    console.log('Inicialización de reproductor de audio completada.');
+});
     </script>
 </body>
 </html>
