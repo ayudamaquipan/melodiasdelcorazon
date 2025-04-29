@@ -2170,7 +2170,7 @@ input, select, textarea {
             <label for="package">Selecciona tu paquete</label>
             <select id="package" name="package" class="form-control" required>
                 <option value="">Selecciona un paquete</option>
-                <option value="precio">CLP $15.000 - </option>
+                <option value="basic">CLP $15.000 - </option>
                 <option value="mother-special">Especial Día de la Madre - CLP $10.000</option>
             </select>
             <div class="package-price" style="margin-top: 10px; font-weight: bold; color: #ff6b6b; text-align: right;">
@@ -2296,8 +2296,6 @@ document.addEventListener("DOMContentLoaded", function() {
     // Mapeo de paquetes a nombres para mostrar
     const packageNames = {
         "basic": "Canción Básica",
-        "premium": "Canción Premium",
-        "deluxe": "Canción Deluxe",
         "mother-special": "Especial Día de la Madre"
     };
     
@@ -2333,7 +2331,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 
                 // 2. Obtener el precio según el paquete seleccionado
                 const selectedPackage = packageSelect.value;
-                const price = packagePrices[selectedPackage] || 99; // Valor predeterminado si no se encuentra
+                const price = packagePrices[selectedPackage] || 15000; // Valor predeterminado si no se encuentra
                 const packageName = packageNames[selectedPackage] || "Canción Personalizada";
                 
                 // 3. Crear preferencia de pago en Mercado Pago mediante nuestra función
@@ -2375,7 +2373,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             <p>Hemos recibido tu solicitud. Te estamos redirigiendo a la página de pago...</p>
                         </div>
                         
-                        <p style="margin-bottom: 1.5rem;">Has seleccionado: <strong>${packageName}</strong> - <strong>€${price}</strong></p>
+                        <p style="margin-bottom: 1.5rem;">Has seleccionado: <strong>${packageName}</strong> - <strong>$${price}</strong></p>
                         
                         <div class="loader" style="margin: 20px auto; border: 5px solid #f3f3f3; border-top: 5px solid #ff6b6b; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite;"></div>
                         <style>@keyframes spin {0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); }}</style>
@@ -2422,7 +2420,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 
                 if (priceDisplay) {
                     const price = packagePrices[selectedPackage] || "N/A";
-                    priceDisplay.textContent = `€${price}`;
+                    priceDisplay.textContent = `$${price}`;
                 }
             });
         }
@@ -2442,7 +2440,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (paqueteElement) paqueteElement.textContent = pedidoData.paquete;
                 
                 const precioElement = document.getElementById('paquete-precio');
-                if (precioElement) precioElement.textContent = `€${pedidoData.precio}`;
+                if (precioElement) precioElement.textContent = `$${pedidoData.precio}`;
             }
         } catch (error) {
             console.error('Error al recuperar datos del pedido:', error);
