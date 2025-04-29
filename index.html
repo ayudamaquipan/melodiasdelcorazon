@@ -1526,6 +1526,88 @@ input, select, textarea {
         font-size: 1.7rem;
     }
 }
+        /* Mejoras del contenedor de video */
+.hero-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap; /* Permite que se ajuste en móviles */
+}
+
+.hero-text {
+    flex: 1;
+    min-width: 300px; /* Garantiza un mínimo de ancho */
+}
+
+.hero-video {
+    flex: 1;
+    min-width: 300px; /* Garantiza un mínimo de ancho */
+}
+
+.video-container {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Mantiene proporción de video */
+}
+
+.hero-video-element {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+}
+
+/* Botón de sonido */
+.sound-toggle {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.sound-toggle:hover {
+    background-color: var(--color-primary);
+}
+
+/* Media queries para responsive */
+@media (max-width: 768px) {
+    .hero-content {
+        flex-direction: column;
+    }
+    
+    .hero-text, .hero-video {
+        width: 100%;
+    }
+    
+    .hero-text {
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+    
+    .hero-text h2 {
+        text-align: center;
+    }
+    
+    .hero-features {
+        align-items: center;
+    }
+}
     </style>
 </head>
 <body>
@@ -1551,54 +1633,53 @@ input, select, textarea {
         </ul>
     </nav>
 <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h2>Regala una canción única para esa persona especial</h2>
-                    <p>¿Buscas un regalo verdaderamente único que emocione y deje huella? Nuestras canciones personalizadas, capturan sentimientos profundos que las palabras no logran expresar. Diseñadas para ser tan especiales como la relación que deseas celebrar, cada melodía es una obra única, a la medida de tu historia.</p>
-                    <div class="hero-features">
-                        <div class="hero-feature">
-                            <span class="hero-feature-icon">🎵</span>
-                            <span class="hero-feature-text">Composición original</span>
-                        </div>
-                        <div class="hero-feature">
-                            <span class="hero-feature-icon">🎤</span>
-                            <span class="hero-feature-text">Voces profesionales</span>
-                        </div>
-                        <div class="hero-feature">
-                            <span class="hero-feature-icon">💌</span>
-                            <span class="hero-feature-text">Letra personalizada</span>
-                        </div>
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h2>Regala una canción única para esa persona especial</h2>
+                <p>¿Buscas un regalo inolvidable que toque el corazón? Nuestras canciones personalizadas expresan sentimientos que las palabras comunes no pueden. Creadas por compositores profesionales, cada canción es tan única como la relación que quieres celebrar.</p>
+                <div class="hero-features">
+                    <div class="hero-feature">
+                        <span class="hero-feature-icon">🎵</span>
+                        <span class="hero-feature-text">Composición original</span>
                     </div>
-                    <a href="#offer" class="btn btn-accent">Ver Oferta Especial</a>
+                    <div class="hero-feature">
+                        <span class="hero-feature-icon">🎤</span>
+                        <span class="hero-feature-text">Voces profesionales</span>
+                    </div>
+                    <div class="hero-feature">
+                        <span class="hero-feature-icon">💌</span>
+                        <span class="hero-feature-text">Letra personalizada</span>
+                    </div>
                 </div>
-<div class="hero-video">
-    <div class="video-container">
-        <!-- Imagen de miniatura (se muestra antes de reproducir el video) -->
-        <img src="img/video-thumbnail.jpg" alt="Video promocional" class="hero-image">
-        
-        <!-- Elemento de video (inicialmente oculto) -->
-        <video class="hero-video-element" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 10px;" controls playsinline>
-            <source src="video/muestra.mp4" type="video/mp4">
-            <source src="video/muestra.webm" type="video/webm">
-            Tu navegador no soporta la reproducción de videos.
-        </video>
-        
-        <!-- Botón de reproducción personalizado -->
-        <div class="play-button">
-            <span>▶</span>
-        </div>
-    </div>
-</div>
-            <div class="social-proof">
-                <p>Más de <strong>5,000</strong> clientes satisfechos</p>
-                <div class="trust-badges">
-                    <span>⭐⭐⭐⭐⭐ 4.9/5 en Google</span>
-                    <span>⭐⭐⭐⭐⭐ 4.8/5 en Trustpilot</span>
+                <a href="#offer" class="btn btn-accent">Ver Oferta Especial</a>
+            </div>
+            
+            <!-- Contenedor de video mejorado -->
+            <div class="hero-video">
+                <div class="video-container">
+                    <!-- Video con autoplay, loop, muted y sin controles -->
+                    <video id="hero-video-player" class="hero-video-element" autoplay loop muted playsinline>
+                        <source src="video/muestra.mp4" type="video/mp4">
+                        Tu navegador no soporta la reproducción de videos.
+                    </video>
+                    
+                    <!-- Botón de sonido (inicialmente silenciado) -->
+                    <button class="sound-toggle" aria-label="Activar sonido">
+                        <span class="sound-icon">🔇</span>
+                    </button>
                 </div>
             </div>
         </div>
-    </section>
+        <div class="social-proof">
+            <p>Más de <strong>5,000</strong> clientes satisfechos</p>
+            <div class="trust-badges">
+                <span>⭐⭐⭐⭐⭐ 4.9/5 en Google</span>
+                <span>⭐⭐⭐⭐⭐ 4.8/5 en Trustpilot</span>
+            </div>
+        </div>
+    </div>
+</section>
 <section id="offer">
         <div class="container">
             <h2 class="section-title">Oferta Especial Día de la Madre</h2>
@@ -2449,6 +2530,42 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!videoElement.ended) {
                 playButton.style.display = 'flex';
             }
+        });
+    }
+});
+        document.addEventListener('DOMContentLoaded', function() {
+    // Elementos del video
+    const videoElement = document.getElementById('hero-video-player');
+    const soundToggle = document.querySelector('.sound-toggle');
+    const soundIcon = document.querySelector('.sound-icon');
+    
+    if (videoElement && soundToggle) {
+        // Asegurar que el video inicie automáticamente
+        videoElement.play().catch(error => {
+            console.log('Autoplay no fue posible:', error);
+            // No hacemos nada más, el video ya está configurado como muted
+            // lo que debería permitir el autoplay en la mayoría de navegadores
+        });
+        
+        // Función para alternar el sonido
+        soundToggle.addEventListener('click', function() {
+            if (videoElement.muted) {
+                videoElement.muted = false;
+                soundIcon.textContent = '🔊';
+                soundToggle.setAttribute('aria-label', 'Silenciar');
+            } else {
+                videoElement.muted = true;
+                soundIcon.textContent = '🔇';
+                soundToggle.setAttribute('aria-label', 'Activar sonido');
+            }
+        });
+        
+        // Reiniciar video si falla
+        videoElement.addEventListener('error', function() {
+            console.error('Error en la reproducción del video');
+            // Intentar cargar de nuevo
+            videoElement.load();
+            videoElement.play().catch(e => console.log('No se pudo reproducir después del error'));
         });
     }
 });
