@@ -1608,6 +1608,85 @@ input, select, textarea {
         align-items: center;
     }
 }
+                    /* Estilos para mejorar la interacción de las tarjetas de ejemplo */
+            .example-image-container {
+                position: relative;
+                overflow: hidden;
+                cursor: pointer;
+            }
+
+            .example-img {
+                width: 100%;
+                height: 220px;
+                object-fit: cover;
+                transition: transform 0.3s ease, filter 0.3s ease;
+            }
+
+            .play-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.3);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                cursor: pointer;
+            }
+
+            .example-card:hover .play-overlay {
+                opacity: 1;
+            }
+
+            .play-icon {
+                color: white;
+                font-size: 3rem;
+                background-color: rgba(255, 107, 107, 0.9);
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: transform 0.2s ease;
+            }
+
+            .play-overlay:hover .play-icon {
+                transform: scale(1.1);
+            }
+
+            /* Efecto cuando se está reproduciendo audio */
+            .example-card.playing .example-img {
+                transform: scale(1.05);
+                filter: brightness(0.8);
+            }
+
+            /* Indicador visual de reproducción */
+            .example-card.playing .example-image-container::after {
+                content: "";
+                position: absolute;
+                bottom: 10px;
+                left: 10px;
+                right: 10px;
+                height: 3px;
+                background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+                animation: audio-wave 1.5s infinite;
+                border-radius: 3px;
+            }
+
+            @keyframes audio-wave {
+                0% { transform: scaleX(0.5); opacity: 0.5; }
+                50% { transform: scaleX(1); opacity: 1; }
+                100% { transform: scaleX(0.5); opacity: 0.5; }
+            }
+
+            /* Ocultar controles de audio nativos para una interfaz más limpia */
+            .audio-player {
+                display: none; /* Ocultar los controles nativos ya que usamos nuestra propia interfaz */
+            }
     </style>
 </head>
 <body>
@@ -1770,15 +1849,15 @@ input, select, textarea {
                                 <span class="rating-text">5.0</span>
                             </div>
                         </div>
-                        <audio controls class="audio-player">
-    <source src="audio/canción-amor.mp3" type="audio/mpeg">
-    <source src="audio/canción-amor.ogg" type="audio/ogg">
-    Tu navegador no soporta el elemento de audio.
-</audio>
+                        <audio class="audio-player" preload="metadata">
+                            <source src="audio/canción-amor.mp3" type="audio/mpeg">
+                            <source src="audio/canción-amor.ogg" type="audio/ogg">
+                            Tu navegador no soporta el elemento de audio.
+                        </audio>
                         <a href="#contact" class="btn btn-secondary btn-sm">Quiero algo similar</a>
                     </div>
                 </div>
-<div class="example-card">
+                <div class="example-card">
                     <div class="example-image-container">
                         <img src="imagen/cumple.jpeg" alt="Canción Cumpleaños" class="example-img">
                         <div class="play-overlay">
@@ -1798,11 +1877,11 @@ input, select, textarea {
                                 <span class="rating-text">4.9</span>
                             </div>
                         </div>
-                        <audio controls class="audio-player">
-    <source src="audio/cumple.mp3" type="audio/mpeg">
-    <source src="audio/cumple.ogg" type="audio/ogg">
-    Tu navegador no soporta el elemento de audio.
-</audio>
+                        <audio class="audio-player" preload="metadata">
+                            <source src="audio/cumple.mp3" type="audio/mpeg">
+                            <source src="audio/cumple.ogg" type="audio/ogg">
+                            Tu navegador no soporta el elemento de audio.
+                        </audio>
                         <a href="#contact" class="btn btn-secondary btn-sm">Quiero algo similar</a>
                     </div>
                 </div>
@@ -1826,11 +1905,11 @@ input, select, textarea {
                                 <span class="rating-text">5.0</span>
                             </div>
                         </div>
-                        <audio controls class="audio-player">
-    <source src="audio/madre.mp3" type="audio/mpeg">
-    <source src="audio/madre.ogg" type="audio/ogg">
-    Tu navegador no soporta el elemento de audio.
-</audio>
+                        <audio class="audio-player" preload="metadata">
+                            <source src="audio/madre.mp3" type="audio/mpeg">
+                            <source src="audio/madre.ogg" type="audio/ogg">
+                            Tu navegador no soporta el elemento de audio.
+                        </audio>
                         <a href="#contact" class="btn btn-secondary btn-sm">Quiero algo similar</a>
                     </div>
                 </div>
@@ -2569,6 +2648,75 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+        document.addEventListener('DOMContentLoaded', function() {
+                // Obtener todas las tarjetas de ejemplo
+                const exampleCards = document.querySelectorAll('.example-card');
+                
+                // Para cada tarjeta, configurar la funcionalidad de reproducción
+                exampleCards.forEach(card => {
+                    const imageContainer = card.querySelector('.example-image-container');
+                    const playOverlay = card.querySelector('.play-overlay');
+                    const playIcon = card.querySelector('.play-icon');
+                    const audioPlayer = card.querySelector('.audio-player');
+                    
+                    // Verificar que existan todos los elementos necesarios
+                    if (imageContainer && audioPlayer && playOverlay) {
+                        // Función para alternar la reproducción
+                        function togglePlayback() {
+                            // Si el audio está pausado, reproducirlo
+                            if (audioPlayer.paused) {
+                                // Pausar todos los demás audios primero
+                                document.querySelectorAll('.audio-player').forEach(player => {
+                                    if (player !== audioPlayer && !player.paused) {
+                                        player.pause();
+                                        
+                                        // Actualizar el ícono en la tarjeta correspondiente
+                                        const otherCard = player.closest('.example-card');
+                                        const otherIcon = otherCard.querySelector('.play-icon');
+                                        const otherOverlay = otherCard.querySelector('.play-overlay');
+                                        
+                                        if (otherIcon) otherIcon.innerHTML = '▶';
+                                        if (otherOverlay) otherOverlay.style.opacity = '0';
+                                        otherCard.classList.remove('playing');
+                                    }
+                                });
+                                
+                                // Reproducir este audio
+                                audioPlayer.play()
+                                    .then(() => {
+                                        // Cambiar el ícono a pausa
+                                        if (playIcon) playIcon.innerHTML = '❚❚';
+                                        // Mantener visible el overlay
+                                        playOverlay.style.opacity = '1';
+                                        // Activar efecto visual
+                                        card.classList.add('playing');
+                                    })
+                                    .catch(error => {
+                                        console.error('Error al reproducir audio:', error);
+                                        alert('No se pudo reproducir el audio. Inténtalo de nuevo más tarde.');
+                                    });
+                            } else {
+                                // Si está reproduciéndose, pausarlo
+                                audioPlayer.pause();
+                                if (playIcon) playIcon.innerHTML = '▶';
+                                playOverlay.style.opacity = '0';
+                                card.classList.remove('playing');
+                            }
+                        }
+                        
+                        // Hacer clic en la imagen o en el overlay de reproducción
+                        imageContainer.addEventListener('click', togglePlayback);
+                        playOverlay.addEventListener('click', togglePlayback);
+                        
+                        // Cuando el audio termine, restablecer la interfaz
+                        audioPlayer.addEventListener('ended', function() {
+                            if (playIcon) playIcon.innerHTML = '▶';
+                            playOverlay.style.opacity = '0';
+                            card.classList.remove('playing');
+                        });
+                    }
+                });
+            });
     </script>
 </body>
 </html>
