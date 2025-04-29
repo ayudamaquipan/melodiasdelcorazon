@@ -2170,8 +2170,8 @@ input, select, textarea {
             <label for="package">Selecciona tu paquete</label>
             <select id="package" name="package" class="form-control" required>
                 <option value="">Selecciona un paquete</option>
-                <option value="precio">$15.000 - </option>
-                <option value="mother-special">Especial Día de la Madre - $10.000</option>
+                <option value="precio">CLP $15.000 - </option>
+                <option value="mother-special">Especial Día de la Madre - CLP $10.000</option>
             </select>
             <div class="package-price" style="margin-top: 10px; font-weight: bold; color: #ff6b6b; text-align: right;">
 Precio: <span id="selected-price">--</span>
@@ -2289,10 +2289,8 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Mapeo de paquetes a precios
     const packagePrices = {
-        "basic": 99,
-        "premium": 149,
-        "deluxe": 249,
-        "mother-special": 84
+        "basic": 15000,
+        "mother-special": 10000
     };
     
     // Mapeo de paquetes a nombres para mostrar
